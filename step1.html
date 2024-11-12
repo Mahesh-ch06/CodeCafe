@@ -740,66 +740,40 @@ blockquote {
 
 <style>
     /* Layout Styling for Navigation */
-.navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 2em;
-    padding: 1em;
-    border-top: 1px solid #e0e0e0; /* Lighter separator line */
-}
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 1px solid #e0e0e0; /* Light gray border */
+    }
 
-/* Button Styling */
-.nav-button {
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    text-decoration: none;
-    border-radius: 20px;
-    border: 1px solid transparent; /* Initially no border */
-    transition: all 0.3s ease;
-    display: inline-block;
-    text-align: center;
-    background-color: #f7f7f7; /* Light background */
-}
+    /* Notion-like Button Styling */
+    .nav-button {
+        padding: 10px 16px;
+        font-size: 14px;
+        color: #444; /* Darker gray text color */
+        text-decoration: none;
+        background-color: #f5f5f5; /* Light gray background */
+        border: 1px solid #e0e0e0; /* Subtle border */
+        border-radius: 6px; /* Rounded corners */
+        font-weight: 500;
+        transition: background-color 0.2s, transform 0.1s ease, box-shadow 0.1s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    }
 
-/* Specific Button Colors */
-.nav-button.previous {
-    background-color: #f2f2f2; /* Light gray for Previous */
-    border: 1px solid #e0e0e0; /* Light gray border */
-    color: #9e9e9e; /* Text color for Previous */
-}
+    /* Hover Effect */
+    .nav-button:hover {
+        background-color: #f0f0f0; /* Slightly darker gray on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Slightly larger shadow */
+    }
 
-.nav-button.next {
-    background-color: #e3f2fd; /* Light blue for Next */
-    border: 1px solid #90caf9; /* Light blue border */
-    color: #1976d2; /* Text color for Next */
-}
-
-.nav-button.submit {
-    background-color: #e8f5e9; /* Light green for Submit */
-    border: 1px solid #a5d6a7; /* Light green border */
-    color: #388e3c; /* Text color for Submit */
-}
-
-/* Hover Effects */
-.nav-button:hover {
-    background-color: #e0e0e0; /* Slight darkening on hover */
-    color: #000;
-    border-color: #bdbdbd; /* Darker border on hover */
-    transform: translateY(-2px); /* Slight hover lift */
-}
-
-/* Active/Pressed State */
-.nav-button:active {
-    background-color: #c0c0c0; /* Even darker on active */
-    transform: translateY(1px); /* Slight indent when pressed */
-}
-
-/* Focus Styles */
-.nav-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5); /* Blue outline for accessibility */
-}
+    /* Click/Active Effect */
+    .nav-button:active {
+        transform: scale(0.98); /* Slight shrink effect */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Smaller shadow */
+        background-color: #e8e8e8; /* Darken background on click */
+    }
+</style>
