@@ -1,0 +1,63 @@
+/* Basic Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* Light Mode */
+body.light-mode {
+    background-color: #ffffff;
+    color: #333;
+}
+
+.light-mode .navbar {
+    background-color: #f8f9fa;
+}
+
+.light-mode .navbar-light .navbar-nav .nav-link {
+    color: #333;
+}
+
+.light-mode footer {
+    background-color: #343a40;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark-mode .navbar {
+    background-color: #333;
+}
+
+.dark-mode .navbar-light .navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.dark-mode footer {
+    background-color: #232323;
+}
+
+/* Responsive Styling */
+@media (max-width: 767px) {
+    .navbar-nav {
+        text-align: center;
+    }
+}

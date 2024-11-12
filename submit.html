@@ -694,48 +694,66 @@
 
 <style>
     /* Layout Styling for Navigation */
-    .navigation {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        margin-top: 2em;
-        padding: 1em;
-        border-top: 2px solid #ddd;
-    }
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 2em;
+    padding: 1em;
+    border-top: 1px solid #e0e0e0; /* Lighter separator line */
+}
 
-    /* Button Styling */
-    .nav-button {
-        padding: 12px 24px;
-        font-size: 16px;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
+/* Button Styling */
+.nav-button {
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    border-radius: 20px;
+    border: 1px solid transparent; /* Initially no border */
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    background-color: #f7f7f7; /* Light background */
+}
 
-    /* Specific Button Colors */
-    .nav-button.previous {
-        background-color: #f57c00; /* Orange for Previous */
-    }
-    .nav-button.next {
-        background-color: #4CAF50; /* Green for Next */
-    }
-    .nav-button.submit {
-        background-color: #2196F3; /* Blue for Submit */
-    }
+/* Specific Button Colors */
+.nav-button.previous {
+    background-color: #f2f2f2; /* Light gray for Previous */
+    border: 1px solid #e0e0e0; /* Light gray border */
+    color: #9e9e9e; /* Text color for Previous */
+}
 
-    /* Hover Effects */
-    .nav-button:hover {
-        transform: translateY(-3px);
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    }
+.nav-button.next {
+    background-color: #e3f2fd; /* Light blue for Next */
+    border: 1px solid #90caf9; /* Light blue border */
+    color: #1976d2; /* Text color for Next */
+}
 
-    /* Active/Pressed State */
-    .nav-button:active {
-        transform: translateY(1px);
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-</style>
+.nav-button.submit {
+    background-color: #e8f5e9; /* Light green for Submit */
+    border: 1px solid #a5d6a7; /* Light green border */
+    color: #388e3c; /* Text color for Submit */
+}
 
+/* Hover Effects */
+.nav-button:hover {
+    background-color: #e0e0e0; /* Slight darkening on hover */
+    color: #000;
+    border-color: #bdbdbd; /* Darker border on hover */
+    transform: translateY(-2px); /* Slight hover lift */
+}
+
+/* Active/Pressed State */
+.nav-button:active {
+    background-color: #c0c0c0; /* Even darker on active */
+    transform: translateY(1px); /* Slight indent when pressed */
+}
+
+/* Focus Styles */
+.nav-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5); /* Blue outline for accessibility */
+}

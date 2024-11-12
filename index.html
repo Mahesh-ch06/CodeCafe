@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeCafé</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Header */
+        header {
+            background-color: #2a3d66;
+            padding: 20px 0;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-right: 30px;
+        }
+
+        .nav-link {
+            font-size: 16px;
+            color: #fff;
+            padding: 8px 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f1c40f;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .nav-link-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            z-index: 99;
+        }
+
+        .line {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-list-desktop {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            header.active .nav-list-mobile {
+                display: block;
+            }
+
+            .nav-list-mobile {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #2a3d66;
+                width: 100%;
+                padding: 20px;
+                list-style: none;
+                text-align: center;
+            }
+
+            .nav-list-mobile .nav-item {
+                margin-bottom: 20px;
+            }
+
+            .nav-list-mobile .nav-link {
+                color: #fff;
+                font-size: 18px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px 5%;
+            background: linear-gradient(135deg, #2a3d66, #3a4b73);
+            color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            background-color: #f1c40f;
+            color: #fff;
+            padding: 14px 35px;
+            font-size: 18px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #f39c12;
+        }
+
+        .hero-img {
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 80px 5%;
+            gap: 20px;
+        }
+
+        .about-card {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .about-card p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* Content Section */
+        .content-section {
+            background-color: #f9f9f9;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .content-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .content-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            width: 30%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-card h2 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .content-card p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .content-card .btn {
+            background-color: #f1c40f;
+            padding: 12px 30px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .content-card .btn:hover {
+            background-color: #f39c12;
+        }
+
+        /* Closing Section */
+        .closing {
+            background-color: #2a3d66;
+            color: #fff;
+            text-align: center;
+            padding: 80px 5%;
+            border-radius: 20px;
+        }
+
+        .closing h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .closing p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a3d66;
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #f1c40f;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/" class="nav-link nav-link-logo">CodeCafé</a>
+            <nav>
+                <ul class="nav-list nav-list-desktop">
+                    <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="/support" class="nav-link">Support</a></li>
+                    <li class="nav-item"><a href="/contents" class="nav-link">Explore Us</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Welcome to CodeCafé</h1>
+                <p>Your one-stop platform to sharpen your coding skills and explore the latest in programming!</p>
+                <a href="/contents" class="cta-btn">Start Learning</a>
+            </div>
+            <img class="hero-img" src="https://via.placeholder.com/500" alt="CodeCafé Banner">
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="about-card">
+                <h3>Our Mission</h3>
+                <p>To create a community where coders of all levels can learn, share, and grow together.</p>
+            </div>
+            <div class="about-card">
+                <h3>Our Vision</h3>
+                <p>To become the leading hub for coding enthusiasts, offering top-notch resources and a thriving community.</p>
+            </div>
+            <div class="about-card">
+                <h3>Our Values</h3>
+                <p>Innovation, collaboration, and continuous learning are at the heart of what we do.</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <h2>What We Offer</h2>
+            <div class="content-cards">
+                <div class="content-card">
+                    <h2>Interactive Coding</h2>
+                    <p>Engage in hands-on challenges that test and refine your skills in real-time.</p>
+                    <a href="/courses" class="btn">Start Learning</a>
+                </div>
+                <div class="content-card">
+                    <h2>Community Support</h2>
+                    <p>Join a vibrant community of learners and experts, always ready to support you.</p>
+                    <a href="/community" class="btn">Join Now</a>
+                </div>
+                <div class="content-card">
+                    <h2>Expert Content</h2>
+                    <p>Access industry-standard tutorials and expert-driven courses to level up your coding.</p>
+                    <a href="/content" class="btn">Explore Content</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing Section -->
+        <section class="closing">
+            <h1>Ready to Start Your Journey?</h1>
+            <p>Join thousands of coders and start building the future with us at CodeCafé!</p>
+            <a href="/signup" class="cta-btn">Get Started</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-section">
+            <h3>CodeCafé</h3>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/terms">Terms of Service</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <p>&copy; 2024 CodeCafé. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const header = document.querySelector('header');
+        mobileMenuBtn.addEventListener('click', () => {
+            header.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
