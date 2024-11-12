@@ -1,0 +1,828 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Step 3: Looping with for, while, and do-while</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="13612ec9-fb83-80ba-ad39-fd523a46ff80" class="page sans"><header><h1 class="page-title">Step 3: Looping with <code>for</code>, <code>while</code>, and <code>do-while</code></h1><p class="page-description"></p></header><div class="page-body"><h2 id="13612ec9-fb83-802c-8200-eda3ef810ee7" class="">3.1: The <code>for</code> Loop – Counting with Precision</h2><h3 id="13612ec9-fb83-800e-b9b5-f489bcfbf0a6" class="">Explanation</h3><p id="13612ec9-fb83-807c-84a7-c2b02301eae5" class="">The <code>for</code> loop is great for situations where you know exactly how many times you want to repeat a task. It has three parts:</p><ol type="1" id="13612ec9-fb83-805a-9a56-c4b079f46838" class="numbered-list" start="1"><li><strong>Initialization</strong>: Sets up the starting value (e.g., <code>int i = 0</code>).</li></ol><ol type="1" id="13612ec9-fb83-8054-bb07-d4e2ea9d5c1a" class="numbered-list" start="2"><li><strong>Condition</strong>: Tells the loop how long to run (e.g., <code>i &lt; 10</code>).</li></ol><ol type="1" id="13612ec9-fb83-80a1-abdd-d9895bc139b6" class="numbered-list" start="3"><li><strong>Increment/Decrement</strong>: Adjusting the loop variable each time (e.g., <code>i++</code>).<br/><br/></li></ol><h3 id="13612ec9-fb83-808d-98d1-f672742f869b" class="">Syntax</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-8029-b888-d90bc88daba5" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+for (initialization; condition; increment/decrement) {
+    // code to repeat
+}
+</code></pre><h3 id="13612ec9-fb83-80c2-b787-c637763dc11d" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-806e-8a7c-e6a1d51fda1d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class ForLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 5; i++) {
+            System.out.println(&quot;Counting: &quot; + i);
+        }
+    }
+}
+
+</code></pre><h3 id="13612ec9-fb83-80eb-af64-f9f4015f1e70" class="">Real-Life Example</h3><p id="13612ec9-fb83-80ef-83c8-fc53ee43edd5" class="">Think of doing 5 push-ups. You know the number (5), so you use a <code>for</code> loop to do each push-up until you reach 5.</p><ul id="13612ec9-fb83-80dc-b72f-d040c6c39f59" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13612ec9-fb83-8099-93fe-fb8def0a9b02" class="">Mini Task</h3><p id="13612ec9-fb83-806a-8155-ef9c08fb66fc" class=""><strong>Task:</strong> Write a program that counts down from 10 to 1 using a <code>for</code> loop. Print each number.</p><p id="13612ec9-fb83-803d-a6df-d3b39f0b73be" class=""><strong>Task:</strong> Write a program using a <code>for</code> loop to print the even numbers from 2 to 20.</p><ul id="13612ec9-fb83-809c-889f-c669c74c0a2e" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="df66d380-78cd-454c-9b07-1867efbbf302" class="">Questions</h3><p id="903bd7a4-64d1-4f4a-9155-53835111dcb4" class=""><strong>Level 1 (Beginner):</strong></p><ul id="1f0089c6-1bbc-40a2-8b57-ad40f2abfadb" class="bulleted-list"><li style="list-style-type:disc">What does the <code>for</code> loop do?</li></ul><ul id="16da1238-4e54-4f2c-952c-5bd2fbef5f6f" class="bulleted-list"><li style="list-style-type:disc">What happens if the loop condition in a <code>for</code> loop is never met?</li></ul><p id="9e02545e-bf51-421c-9d60-d0fbe3a88fd3" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="4596ff50-2356-4f16-9f47-62d30baecb16" class="bulleted-list"><li style="list-style-type:disc">How would you write a <code>for</code> loop to count down from 10 to 1?</li></ul><ul id="aacf6e7f-9d08-4cec-8c32-258896082678" class="bulleted-list"><li style="list-style-type:disc">Can a <code>for</code> loop have more than one variable in the initialization? (e.g., <code>for (int i = 0, j = 5; i &lt; j; i++, j--)</code>)</li></ul><p id="19d21bf6-b1aa-4ac5-8fbb-650102e81c83" class=""><strong>Level 3 (Advanced):</strong></p><ul id="295e8dbe-dc1d-406d-9f2f-6aca8242aac5" class="bulleted-list"><li style="list-style-type:disc">How would you use a <code>for</code> loop to calculate the sum of numbers from 1 to 100?</li></ul><ul id="6889ae37-9451-409c-84e2-01eed718f550" class="bulleted-list"><li style="list-style-type:disc">Explain the concept of nested <code>for</code> loops and how they work. Give an example with a 2D array.</li></ul></details></li></ul><h2 id="13612ec9-fb83-8052-b462-e4f93fd369b0" class="">3.2: The <code>while</code> Loop – Repeating with Conditions</h2><h3 id="13612ec9-fb83-8055-925b-c37bc6a72ff6" class="">Explanation</h3><p id="13612ec9-fb83-80e0-9929-dfdf838e3024" class="">The <code>while</code> loop repeats a block of code as long as a condition is true. It’s useful when you don’t know beforehand how many times you need to loop, but you do know the condition.</p><h3 id="13612ec9-fb83-8080-b744-d3381d4df55b" class="">Syntax</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-802e-be3d-e9e147454397" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+while (condition) {
+    // code to repeat
+}
+
+</code></pre><h3 id="13612ec9-fb83-8084-bd62-cddf0179d50a" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-8066-9e62-f1803d648ad9" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class WhileLoopExample {
+    public static void main(String[] args) {
+        int i = 1;
+        while (i &lt;= 5) {
+            System.out.println(&quot;Step &quot; + i);
+            i++;
+        }
+    }
+}
+
+</code></pre><h3 id="13612ec9-fb83-80f5-adc4-caf2c3eb5107" class="">Real-Life Example</h3><p id="13612ec9-fb83-80eb-ab38-e63419e2c50b" class="">Imagine filling a glass with water from a pitcher. You keep pouring until the glass is full. Here, the condition is “glass not full,” so you stop pouring when the condition is no longer true.</p><ul id="13612ec9-fb83-806d-a85b-cfa02add0532" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13612ec9-fb83-809d-a893-f9637da62401" class="">Mini Task</h3><p id="13612ec9-fb83-80d3-b908-c202ebc8599b" class=""><strong>Task:</strong> Write a program that counts up from 1 to a target number (e.g., 7). Use a <code>while</code> loop to print each number until it reaches the target.</p><p id="13612ec9-fb83-80b7-b433-f55ff4ad66a3" class=""><strong>Task:</strong> Write a program using a <code>while</code> loop that prints numbers from 10 down to 1.</p><ul id="13612ec9-fb83-80ad-bc7d-ef3cade0552b" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="2463176d-4668-4084-8020-c1bd2e3afa77" class="">Questions</h3><p id="bd5e7303-4a9e-4528-87fc-fc129ae57472" class=""><strong>Level 1 (Beginner):</strong></p><ul id="d4ace6a7-c34c-492a-aa9d-04f4e266b84d" class="bulleted-list"><li style="list-style-type:disc">How does a <code>while</code> loop work?</li></ul><ul id="b2d4389b-cf5c-4b93-93d1-de90438e0bd9" class="bulleted-list"><li style="list-style-type:disc">What happens if the condition in a <code>while</code> loop is initially <code>false</code>?</li></ul><p id="672c7489-26ea-4047-9caa-f8cd62cdb6b3" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="92b967f1-cd27-47f4-a8a3-af2dba9b43da" class="bulleted-list"><li style="list-style-type:disc">How would you convert a <code>while</code> loop to a <code>for</code> loop?</li></ul><ul id="12823ed8-118c-4c0c-8b62-0f082554dff0" class="bulleted-list"><li style="list-style-type:disc">How can you prevent an infinite loop when using <code>while</code>?</li></ul><p id="18321631-fe90-40af-bc2b-4383e4ec56ca" class=""><strong>Level 3 (Advanced):</strong></p><ul id="030c4f94-1f0b-4e07-8ceb-e856e0d4dd30" class="bulleted-list"><li style="list-style-type:disc">Explain how a <code>while</code> loop can be used to validate user input (e.g., asking for input until it’s within a specific range).</li></ul><ul id="6819542b-3319-4647-a555-63dc788bd8f2" class="bulleted-list"><li style="list-style-type:disc">Discuss how to use a <code>while</code> loop with complex conditions, such as reading lines from a file until the end.</li></ul></details></li></ul><h2 id="13612ec9-fb83-8083-9ad9-f2a8361e59c3" class="">3.3: The <code>do-while</code> Loop – Guaranteed One-Time Execution</h2><h3 id="13612ec9-fb83-8051-abea-f54f5e51e921" class="">Explanation</h3><p id="13612ec9-fb83-80ef-be89-d016f361f131" class="">The <code>do-while</code> loop is like the <code>while</code> loop, but it guarantees that the code runs at least once, even if the condition is false from the start. This is helpful for tasks that need to be performed once before the condition is checked.</p><h3 id="13612ec9-fb83-8073-b786-d23b10894579" class="">Syntax</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-80a0-9aed-fe87d6a62882" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+do {
+    // code to repeat
+} while (condition);
+
+</code></pre><h3 id="13612ec9-fb83-8088-9f3c-c0f370e567dc" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-80f5-b45a-c7dc577d361b" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class DoWhileExample {
+    public static void main(String[] args) {
+        int i = 1;
+        do {
+            System.out.println(&quot;Number: &quot; + i);
+            i++;
+        } while (i &lt;= 5);
+    }
+}
+
+</code></pre><h3 id="13612ec9-fb83-8079-a00d-c78cc169c34a" class="">Real-Life Example</h3><p id="13612ec9-fb83-80b1-ac5b-d16c0159ac41" class="">Think of pressing a light switch. You press it at least once even if it’s already on or off, and then check to see if the light has changed.</p><ul id="13612ec9-fb83-808e-9a9a-e9ae9a443f90" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13612ec9-fb83-804f-9bb9-f5ac0dd012e6" class="">Mini Task</h3><p id="13612ec9-fb83-80da-9911-f62fd63aa5f2" class=""><strong>Task:</strong> Write a program that rolls a die until you roll a 6.</p><ol type="1" id="13612ec9-fb83-8066-89fb-e99aa91b5cc6" class="numbered-list" start="1"><li>Use a <code>do-while</code> loop to generate a random number between 1 and 6.</li></ol><ol type="1" id="13612ec9-fb83-8026-b8b5-eb916da3f5c1" class="numbered-list" start="2"><li>Print each roll until you get a 6.</li></ol><ul id="13612ec9-fb83-805b-9fec-c239fc60c320" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="7953a6c0-d40d-416d-84f6-9b2f76f7b228" class="">Questions</h3><p id="54404bfd-0063-4992-bbba-a04e1121164b" class=""><strong>Level 1 (Beginner):</strong></p><ul id="afaf935a-c3dc-459d-8607-2ce8c273715c" class="bulleted-list"><li style="list-style-type:disc">What is the key difference between a <code>while</code> and <code>do-while</code> loop?</li></ul><ul id="bcdc542d-568a-4d51-933c-a9b4ddecf761" class="bulleted-list"><li style="list-style-type:disc">When would you use a <code>do-while</code> loop instead of a <code>while</code> loop?</li></ul><p id="c83a089a-1afc-4895-9bd3-88e8002ef81a" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="75dbe945-aa73-4395-b51c-f86860aeb707" class="bulleted-list"><li style="list-style-type:disc">How would you modify a <code>do-while</code> loop to count down from 5 to 1?</li></ul><ul id="98c9145f-b0df-478e-828f-d37dd0a18ff8" class="bulleted-list"><li style="list-style-type:disc">What will happen if you set a condition that is always <code>false</code> in a <code>do-while</code> loop?</li></ul><p id="694f5eb2-a9d3-4f65-bb97-143cb456690a" class=""><strong>Level 3 (Advanced):</strong></p><ul id="9b4ce0d4-48ff-4549-bbb0-aa4ea4cfa81a" class="bulleted-list"><li style="list-style-type:disc">Can you use a <code>do-while</code> loop for input validation (e.g., asking for an age input until it’s valid)?</li></ul><ul id="5d676900-a427-4e60-96fa-03b416f63dc7" class="bulleted-list"><li style="list-style-type:disc">How does the <code>do-while</code> loop perform differently than the <code>for</code> and <code>while</code> loops in terms of performance?</li></ul><p id="ab7e9b75-e3a2-4f4c-9d2b-2c35cafe12e6" class="">
+</p></details></li></ul><h2 id="13612ec9-fb83-8048-aed1-f7a09d2dbb38" class="">3.4: Using <code>break</code> and <code>continue</code> in Loops</h2><h3 id="13612ec9-fb83-80fa-9bdc-d97bcf956452" class="">Explanation</h3><ol type="1" id="13612ec9-fb83-80e4-b1ac-d8ab3ec145cb" class="numbered-list" start="1"><li><code><strong>break</strong></code>: Exits the loop immediately, regardless of the loop condition.</li></ol><ol type="1" id="13612ec9-fb83-8085-8d95-fc53627c0334" class="numbered-list" start="2"><li><code><strong>continue</strong></code>: Skips the current iteration and moves to the next one.</li></ol><h3 id="13612ec9-fb83-806b-8f48-fcfe5cf592ed" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-804b-b639-e231c2bf8722" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class BreakContinueExample {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 10; i++) {
+            if (i == 5) {
+                break; // Exit the loop when i is 5
+            }
+            System.out.println(&quot;Number: &quot; + i);
+        }
+
+        System.out.println(&quot;Using continue:&quot;);
+
+        for (int j = 1; j &lt;= 10; j++) {
+            if (j % 2 == 0) {
+                continue; // Skip even numbers
+            }
+            System.out.println(&quot;Odd Number: &quot; + j);
+        }
+    }
+}
+
+</code></pre><h3 id="13612ec9-fb83-8064-b56a-dae40d506269" class="">Real-Life Example</h3><ul id="13612ec9-fb83-8031-9a93-e3dd983aca41" class="bulleted-list"><li style="list-style-type:disc"><code><strong>break</strong></code>: Think of a <code>break</code> like a fire alarm; you immediately stop and exit the building.</li></ul><ul id="13612ec9-fb83-80d3-b40d-ff085e7278b8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>continue</strong></code>: Imagine grading papers but only looking at certain sections; you skip others (<code>continue</code>).</li></ul><hr id="13612ec9-fb83-8072-bc92-e6f5bc6808c4"/><ul id="13612ec9-fb83-8030-812a-cf470c57e996" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13612ec9-fb83-8059-afc9-ea16e4f84bc9" class="">Mini Task</h3><p id="13612ec9-fb83-805a-979c-d4d380e016d3" class=""><strong>Task:</strong> Write a program with a loop from 1 to 10, which:</p><ul id="13612ec9-fb83-80bc-83d4-f19c75393e13" class="bulleted-list"><li style="list-style-type:disc">Uses <code>continue</code> to skip the number 5.</li></ul><ul id="13612ec9-fb83-80d2-9f99-fc7ebc12cbbb" class="bulleted-list"><li style="list-style-type:disc">Uses <code>break</code> to stop the loop when the number reaches 8.</li></ul><ul id="13612ec9-fb83-808e-9f2d-f8cd8c7e3495" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="99c1c30a-7634-4186-bf00-b22a81f61baf" class="">Questions</h3><p id="3d40463d-b131-42d3-b175-25a58dabd746" class=""><strong>Level 1 (Beginner):</strong></p><ul id="14c0d0e5-e0c0-488f-96ef-8d4c118beeec" class="bulleted-list"><li style="list-style-type:disc">What does <code>break</code> do in a loop?</li></ul><ul id="86273693-e526-4b88-a7e0-7e93a458c648" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of <code>continue</code> in a loop?</li></ul><p id="03e6b6a2-7253-4625-9f47-53b7fd5c15b5" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="e1e3c1cc-5d93-44aa-91de-d2ae99c2c784" class="bulleted-list"><li style="list-style-type:disc">Can you use <code>break</code> and <code>continue</code> in a <code>while</code> loop? Give an example.</li></ul><ul id="c54a84ba-c0c7-4f9f-b7b3-c9d8cf94a5eb" class="bulleted-list"><li style="list-style-type:disc">How would you use <code>continue</code> to print only odd numbers from 1 to 20?</li></ul><p id="ef827b4f-36d5-4d46-b3c6-5df0b5a52898" class=""><strong>Level 3 (Advanced):</strong></p><ul id="f304b708-df8e-4642-8a67-3fdfc5131f82" class="bulleted-list"><li style="list-style-type:disc">Describe how nested loops work with <code>break</code> and <code>continue</code> statements. What happens if you use <code>break</code> inside an inner loop?</li></ul><ul id="a542f41a-f64d-4dfc-bf4e-fc4e1a4613a2" class="bulleted-list"><li style="list-style-type:disc">What are labeled breaks (<code>label:</code>) and how do they work in Java?</li></ul></details></li></ul><h2 id="13612ec9-fb83-8010-8f18-d767d66ee930" class="">3.5: Nested Loops – Loops Inside Loops</h2><h3 id="13612ec9-fb83-80dc-9bf2-c9954917cd9c" class="">Explanation</h3><p id="13612ec9-fb83-8072-b96a-cae2f489fc2e" class="">Nested loops are loops inside another loop. They are useful for tasks like working with multi-dimensional arrays or repeating actions multiple times within other repeated actions.</p><h3 id="13612ec9-fb83-8069-b39b-f1f5e32c4951" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13612ec9-fb83-80c6-b434-c05d3223d847" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class NestedLoopExample {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt;= 3; i++) {
+            for (int j = 1; j &lt;= 3; j++) {
+                System.out.println(&quot;i = &quot; + i + &quot;, j = &quot; + j);
+            }
+        }
+    }
+}
+
+</code></pre><h3 id="13612ec9-fb83-8044-91c0-c5be44b754c8" class="">Real-Life Example</h3><p id="13612ec9-fb83-805b-83a6-f47b271f321a" class="">Imagine a restaurant with tables and chairs. You’re checking each chair (inner loop) at each table (outer loop) to make sure they&#x27;re clean.</p><hr id="13612ec9-fb83-8045-93fc-e8daf1a90432"/><ul id="13612ec9-fb83-80f3-88fc-eb3f34ca5d51" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13612ec9-fb83-80a7-9a05-e80b9a313d39" class="">Mini Task</h3><p id="13612ec9-fb83-8003-8274-cca10afcbd21" class=""><strong>Task:</strong> Write a program using nested <code>for</code> loops to display a 3x3 grid of asterisks (<code>*</code>).</p><ul id="13612ec9-fb83-80c7-b362-d1a984322bbf" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="52b8ac3f-7f89-46bf-8b28-f28e2125ebaa" class="">Questions</h3><p id="6b620a38-817a-4bb3-acad-d9f3d09f69b3" class=""><strong>Level 1 (Beginner):</strong></p><ul id="7c486db9-1d0a-435a-91a2-6e409451b7cc" class="bulleted-list"><li style="list-style-type:disc">What is a nested loop?</li></ul><ul id="f83a8635-88ac-4bed-a334-847eb89e4a77" class="bulleted-list"><li style="list-style-type:disc">How many times will the inner loop run if the outer loop runs 5 times and the inner loop runs 3 times?</li></ul><p id="66b6b3fe-24e4-4db2-9f8a-c733b6334522" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="000b8e26-e1be-4e0b-bdaa-91b5f4a1450a" class="bulleted-list"><li style="list-style-type:disc">Can you nest a <code>while</code> loop inside a <code>for</code> loop?</li></ul><ul id="c7fff722-ac0d-4b4f-96c5-b81a9e27aacc" class="bulleted-list"><li style="list-style-type:disc">How would you use nested loops to print a multiplication table (1 to 10)?</li></ul><p id="37af4c43-7505-4bdc-b8d3-c25bf4414f5f" class=""><strong>Level 3 (Advanced):</strong></p><ul id="eedcc916-dc03-4022-8752-8a038d0d7241" class="bulleted-list"><li style="list-style-type:disc">Describe a situation where a nested loop would be inefficient and how you might optimize it.</li></ul><ul id="88306829-d4a8-4c75-bf07-817fe5460fce" class="bulleted-list"><li style="list-style-type:disc">How can you use nested loops to print a right-aligned triangle of numbers?</li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
+
+
+<!-- Navigation Section -->
+<div class="navigation">
+    <a href="step2.html" class="nav-button previous">Previous Step</a>
+    <a href="step4.html" class="nav-button next">Next Step</a>
+    <a href="submit.html" class="nav-button submit">Submit Code</a>
+</div>
+
+<style>
+    /* Layout Styling for Navigation */
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 2px solid #ddd;
+    }
+
+    /* Button Styling */
+    .nav-button {
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Specific Button Colors */
+    .nav-button.previous {
+        background-color: #f57c00; /* Orange for Previous */
+    }
+    .nav-button.next {
+        background-color: #4CAF50; /* Green for Next */
+    }
+    .nav-button.submit {
+        background-color: #2196F3; /* Blue for Submit */
+    }
+
+    /* Hover Effects */
+    .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Active/Pressed State */
+    .nav-button:active {
+        transform: translateY(1px);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+

@@ -1,0 +1,849 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Step 4: Logical Operators and Advanced Conditions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="13912ec9-fb83-8097-997e-dc4be7d13da7" class="page sans"><header><h1 class="page-title">Step 4: Logical Operators and Advanced Conditions</h1><p class="page-description"></p></header><div class="page-body"><h2 id="13912ec9-fb83-807f-acd0-d8d957002c11" class="">4.1:<code>if</code> Statement – Basic Conditional Check</h2><h3 id="13912ec9-fb83-80cf-94a3-e21b5ee31d1c" class="">Explanation</h3><p id="13912ec9-fb83-8062-9e83-da1c4d9a8401" class="">The <code>if</code> statement allows the program to execute a block of code only if a specified condition is true.</p><h3 id="13912ec9-fb83-8032-9c0f-e11f3a2b6815" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-80ff-aa36-d0006cfc28a0" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class IfStatementExample {
+    public static void main(String[] args) {
+        int temperature = 30;
+
+        // Checking if the temperature is greater than 25
+        if (temperature &gt; 25) {
+            System.out.println(&quot;It&#x27;s a hot day!&quot;);
+        }
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-8031-961e-f2d469d6bfb5" class="">Real-Life Example</h3><p id="13912ec9-fb83-8061-b28e-fe53d9cca459" class="">Think of the <code>if</code> statement like deciding to carry an umbrella if it’s raining. If it’s raining (condition is true), you take the umbrella. If it’s not, you don’t.</p><hr id="13912ec9-fb83-80de-a07e-d5b5bb4b6636"/><ul id="13912ec9-fb83-809d-9d33-fcb2f7868b3e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-80b1-b144-e781922a2a43" class="">Mini Task</h3><p id="13912ec9-fb83-80fd-a607-f282b1c025ca" class=""><strong>Task:</strong> Write a program that checks if a number is positive. If it is, print “The number is positive.”</p><ul id="13912ec9-fb83-80b2-9631-d51094ca21f9" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="8f3bbcb0-82de-4047-8abd-2dceace257bd" class="">Questions</h3><p id="a1d0747e-7401-4ad2-83c0-1698d2ba983e" class=""><strong>Level 1 (Beginner):</strong></p><ul id="be0df469-2904-4165-ad59-6dd2407d2c97" class="bulleted-list"><li style="list-style-type:disc">What does the <code>if</code> statement do?</li></ul><ul id="a92647a8-a24c-4fb9-bad2-6e7e8de1b714" class="bulleted-list"><li style="list-style-type:disc">Can you write an <code>if</code> statement that checks if a number is greater than 10?</li></ul><p id="def3133d-e9d7-4b83-bc22-54e405f9cae5" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="bf861c18-7f8c-41de-a586-35479ae79e6d" class="bulleted-list"><li style="list-style-type:disc">How would you use an <code>if</code> statement to check if a number is both positive and even?</li></ul><ul id="8cf42910-eab4-4c60-bda8-0050fce25f09" class="bulleted-list"><li style="list-style-type:disc">What happens if the condition in an <code>if</code> statement is false?</li></ul><p id="36ba0f74-8a13-455a-b228-c384ffac831e" class=""><strong>Level 3 (Advanced):</strong></p><ul id="db9c703d-1882-46f9-b468-2d360e520251" class="bulleted-list"><li style="list-style-type:disc">How would you use nested <code>if</code> statements to check if a number is both positive and a multiple of 5?</li></ul><ul id="37eb1ef9-73b2-40d3-8d86-30ffdd953ce6" class="bulleted-list"><li style="list-style-type:disc">How can you use an <code>if</code> statement to check multiple conditions in a single line?</li></ul></details></li></ul><h2 id="13912ec9-fb83-808f-abe1-e438a0be2f9a" class="">4.2: <code>if-else</code> Statement – Dual Conditional Check</h2><h3 id="13912ec9-fb83-80eb-b475-d84384a8b583" class="">Explanation</h3><p id="13912ec9-fb83-80d4-b288-cecdfb467a09" class="">The <code>if-else</code> statement allows you to specify an alternative block of code to execute if the condition is false.</p><h3 id="13912ec9-fb83-803a-86bb-d83d0d55632e" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-8084-8007-d77587abe2fe" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class IfElseExample {
+    public static void main(String[] args) {
+        int age = 20;
+
+        // Checking if the person is an adult
+        if (age &gt;= 18) {
+            System.out.println(&quot;You are an adult.&quot;);
+        } else {
+            System.out.println(&quot;You are not an adult.&quot;);
+        }
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-801b-9836-d51725c785c6" class="">Real-Life Example</h3><p id="13912ec9-fb83-80cf-a44f-ef42e572308e" class="">Imagine checking if a movie is suitable for kids. If it’s rated “G,” kids can watch it; otherwise, they can’t.</p><hr id="13912ec9-fb83-80ce-9808-fdb509340e90"/><ul id="13912ec9-fb83-8064-b802-fa00984b2b98" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-80ad-9eee-ce6a795d522d" class="">Mini Task</h3><p id="13912ec9-fb83-809c-afc2-ceb3bd799064" class=""><strong>Task:</strong> Write a program that checks if a number is even or odd and prints “Even” or “Odd” accordingly.</p><ul id="13912ec9-fb83-8070-a247-f04108aedc5c" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="88bc296f-7f34-4e66-9fce-0c34efaaf3dc" class="">Questions</h3><p id="059453ef-5d02-4930-81eb-434dea6ef9aa" class=""><strong>Level 1 (Beginner):</strong></p><ul id="f6125a1a-40a4-4cae-8d22-b81284098648" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>else</code> part of an <code>if-else</code> statement?</li></ul><ul id="994109c0-042b-41c8-b6b8-a96abae08dae" class="bulleted-list"><li style="list-style-type:disc">Write an <code>if-else</code> statement to check if a number is less than 10.</li></ul><p id="54486170-53d7-4e1e-b5fc-099559e488e3" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="ca28baaf-0ef1-45d8-b953-78b453616f31" class="bulleted-list"><li style="list-style-type:disc">How would you modify an <code>if-else</code> statement to include more complex conditions (like checking if a number is even and greater than 10)?</li></ul><ul id="c4593e86-a1be-4f17-8778-1341d92f2ef2" class="bulleted-list"><li style="list-style-type:disc">What happens if you forget to include an <code>else</code> statement?</li></ul><p id="efbb0368-830e-44f4-bbaa-7712d26bc9be" class=""><strong>Level 3 (Advanced):</strong></p><ul id="0742d84b-9658-4b80-8dda-56c6a6915785" class="bulleted-list"><li style="list-style-type:disc">How can you use <code>if-else</code> to check if a number falls within a certain range, say 10 to 20?</li></ul><ul id="ddabe3ca-5de6-4320-87ea-09e9425bb542" class="bulleted-list"><li style="list-style-type:disc">What are the advantages and potential drawbacks of using multiple <code>if-else</code> statements in a row?</li></ul></details></li></ul><h2 id="13912ec9-fb83-8072-9448-ceed689fb57f" class="">4.3: Using <code>&amp;&amp;</code> (AND) and <code>||</code> (OR) Operators</h2><h3 id="13912ec9-fb83-806f-b17d-d8cc72e14cb2" class="">Explanation</h3><p id="13912ec9-fb83-8005-93de-fdf9bf275627" class="">Logical operators help combine multiple conditions:</p><ul id="13912ec9-fb83-80a3-85cd-f06d6407a48e" class="bulleted-list"><li style="list-style-type:disc"><code>&amp;&amp;</code> (AND): Both conditions need to be true.</li></ul><ul id="13912ec9-fb83-8004-967b-cd10c62e4d0b" class="bulleted-list"><li style="list-style-type:disc"><code>||</code> (OR): At least one of the conditions needs to be true.</li></ul><h3 id="13912ec9-fb83-8092-be6d-fddd985fd6f5" class="">Syntax</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-809d-84e9-ed6c3705991f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+if (condition1 &amp;&amp; condition2) {
+    // code to execute if both conditions are true
+}
+if (condition1 || condition2) {
+    // code to execute if at least one condition is true
+}
+
+</code></pre><h3 id="13912ec9-fb83-8090-8e7d-f8470e6f850c" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-802f-8905-d58adc28bd60" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class LogicalOperatorsExample {
+    public static void main(String[] args) {
+        int age = 20;
+        boolean hasID = true;
+
+        if (age &gt;= 18 &amp;&amp; hasID) {
+            System.out.println(&quot;You are allowed to enter.&quot;);
+        } else {
+            System.out.println(&quot;Access denied.&quot;);
+        }
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-808d-89f8-e1fb2ddff411" class="">Real-Life Example</h3><p id="13912ec9-fb83-801a-a1d1-d1662fdd2ea7" class="">Imagine a movie theater where you need to be at least 18 and have a valid ID to watch a restricted movie. Both conditions need to be true to get access.</p><ul id="13912ec9-fb83-80e0-ba66-ea7cb4d47e79" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-8036-9167-df354033ae04" class="">Mini Task</h3><p id="13912ec9-fb83-80f9-b646-f8a4764f1432" class=""><strong>Task:</strong> Write a program that checks if someone qualifies for a student discount.</p><ol type="1" id="13912ec9-fb83-8015-95bf-f380cb238430" class="numbered-list" start="1"><li>Use <code>age</code> (integer) and <code>isStudent</code> (boolean).</li></ol><ol type="1" id="13912ec9-fb83-80e9-a5e7-edca33660a5c" class="numbered-list" start="2"><li>The person qualifies if they are either under 18, or they’re a student (regardless of age).</li></ol><ol type="1" id="13912ec9-fb83-8062-a959-f9cfd5f3ca06" class="numbered-list" start="3"><li>Print <code>&quot;Discount applied&quot;</code> if the condition is met, otherwise <code>&quot;No discount&quot;</code>.</li></ol><ul id="13912ec9-fb83-8057-93b5-d87410b7c524" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="a0799991-cb2d-42cd-9b61-ccc092fc95ac" class="">Questions</h3><h3 id="1fcca675-3048-466f-8213-d8139e44a75f" class=""><strong>Level 1 (Beginner):</strong></h3><p id="a65d8200-f1e0-4972-bc9e-9c99e364d3d0" class=""><strong>Question:</strong> Write a Java program to calculate the area of a rectangle.</p><ol type="1" id="a8178034-b52c-43ac-8567-fe3e3b7323c4" class="numbered-list" start="1"><li>Create two integer variables <code>length</code> and <code>width</code>.</li></ol><ol type="1" id="2b682709-9391-4b1b-869a-52b3d2f3e074" class="numbered-list" start="2"><li>Calculate the area using the formula <code>area = length * width</code>.</li></ol><ol type="1" id="5c716e2b-59f1-4afc-b6ed-f06977ac00ae" class="numbered-list" start="3"><li>Print the result.</li></ol><h3 id="03731984-a0c7-4513-94c2-0a357060a21f" class=""><strong>Level 2 (Intermediate):</strong></h3><p id="c3a098f4-795b-4ee0-abc0-d5e8506686f7" class=""><strong>Question:</strong> Write a Java program that determines if a number is positive, negative, or zero.</p><ol type="1" id="9af6ac90-cf71-488d-b04f-46ad9b0219c5" class="numbered-list" start="1"><li>Define an integer variable <code>num</code>.</li></ol><ol type="1" id="04d0cbbf-14df-4afd-80d3-05a303edb7d1" class="numbered-list" start="2"><li>Use an <code>if-else</code> structure to check if <code>num</code> is greater than, less than, or equal to zero.</li></ol><ol type="1" id="9dd00a45-bdbc-42f5-916d-f476a8aad5d9" class="numbered-list" start="3"><li>Print <code>&quot;Positive&quot;</code>, <code>&quot;Negative&quot;</code>, or <code>&quot;Zero&quot;</code> based on the value of <code>num</code>.</li></ol><h3 id="0509d110-711e-4e6b-a77e-5ad50dd16f2d" class=""><strong>Level 3 (Advanced):</strong></h3><p id="5aae37c9-ee7e-47b6-ad3c-88aeda6908fa" class=""><strong>Question:</strong> Write a Java program to find the sum of all even numbers in an array.</p><ol type="1" id="137fd065-23bc-4d06-b06f-7c791bae9ed4" class="numbered-list" start="1"><li>Create an array of integers <code>numbers</code>.</li></ol><ol type="1" id="75956882-bba2-40f9-852d-2d6af9c3c49c" class="numbered-list" start="2"><li>Use a loop to iterate through the array, checking each number.</li></ol><ol type="1" id="ae9e8624-40eb-4af7-a245-dab6663df84e" class="numbered-list" start="3"><li>If a number is even, add it to a <code>sum</code> variable.</li></ol><ol type="1" id="02d9ad27-bded-4f72-9096-d4cb79e6e049" class="numbered-list" start="4"><li>Print the final sum.</li></ol></details></li></ul><hr id="13912ec9-fb83-8090-be72-efe9a0e405f5"/><h2 id="13912ec9-fb83-801e-a7dd-c87123168d0b" class="">4.4: Combining Multiple <code>if-else</code> Statements with <code>else if</code></h2><h3 id="13912ec9-fb83-8011-ad28-c77550d2d8d7" class="">Explanation</h3><p id="13912ec9-fb83-8044-a2cc-f41d6952c839" class=""><code>else if</code> allows you to add more than one alternative to your <code>if</code> statements, creating a series of choices.</p><h3 id="13912ec9-fb83-8093-8f57-ea4745ac0bd7" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-80c6-a0c2-c83c5a4f9363" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class AgeGroupExample {
+    public static void main(String[] args) {
+        int age = 15;
+
+        if (age &lt; 13) {
+            System.out.println(&quot;Child&quot;);
+        } else if (age &lt; 18) {
+            System.out.println(&quot;Teenager&quot;);
+        } else if (age &lt; 65) {
+            System.out.println(&quot;Adult&quot;);
+        } else {
+            System.out.println(&quot;Senior&quot;);
+        }
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-8040-8a95-e18f957cac83" class="">Real-Life Example</h3><p id="13912ec9-fb83-8086-8dba-f1955868b04b" class="">Consider categorizing people based on age:</p><ul id="13912ec9-fb83-8084-b9ba-d2c7bcf70446" class="bulleted-list"><li style="list-style-type:disc">If they are less than 13, they are a &quot;Child.&quot;</li></ul><ul id="13912ec9-fb83-8089-9501-e662af2b2437" class="bulleted-list"><li style="list-style-type:disc">If they are 13 to 17, they are a &quot;Teenager.&quot;</li></ul><ul id="13912ec9-fb83-802d-aa41-cd5da9c972f9" class="bulleted-list"><li style="list-style-type:disc">If they are 18 to 64, they are an &quot;Adult.&quot;</li></ul><ul id="13912ec9-fb83-80bf-b9f4-e159bc50834c" class="bulleted-list"><li style="list-style-type:disc">If they are 65 or older, they are a &quot;Senior.&quot;</li></ul><ul id="13912ec9-fb83-808e-9347-c25f537f3dc4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-80b9-a83c-e60d3adeff0a" class="">Mini Task</h3><p id="13912ec9-fb83-807a-b346-d98f388ad74b" class=""><strong>Task:</strong> Write a program that categorizes a person’s driving status based on age:</p><ol type="1" id="13912ec9-fb83-8076-b6f8-e22e1787ebc8" class="numbered-list" start="1"><li>Age &lt; 16: Print <code>&quot;Too young to drive.&quot;</code></li></ol><ol type="1" id="13912ec9-fb83-80cf-9d74-d3b75d703436" class="numbered-list" start="2"><li>Age 16–17: Print <code>&quot;Can drive with supervision.&quot;</code></li></ol><ol type="1" id="13912ec9-fb83-80d1-8255-c041f614b4b6" class="numbered-list" start="3"><li>Age 18+: Print <code>&quot;Can drive independently.&quot;</code></li></ol><ul id="13912ec9-fb83-80b0-a57a-d74a4706bf76" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="768f614b-1d06-4af0-a52a-c6cc5ab698e4" class="">Questions</h3><p id="883831a9-aa29-45ec-a627-53c8d3464b53" class=""><strong>Level 1 (Beginner):</strong></p><ul id="fd3387ed-de48-49ee-ba9f-8b505360fb0b" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>else</code> part of an <code>if-else</code> statement?</li></ul><ul id="d3076977-7e55-4572-b507-0b5cd13eca84" class="bulleted-list"><li style="list-style-type:disc">Write an <code>if-else</code> statement to check if a number is less than 10.</li></ul><p id="56871c72-143f-462c-a5d2-b108503e5040" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="0e19ce76-a222-42d8-b896-cdb2fc8c5417" class="bulleted-list"><li style="list-style-type:disc">How would you modify an <code>if-else</code> statement to include more complex conditions (like checking if a number is even and greater than 10)?</li></ul><ul id="9ac90915-356a-46d8-911f-e16a33cb3fa2" class="bulleted-list"><li style="list-style-type:disc">What happens if you forget to include an <code>else</code> statement?</li></ul><p id="1159c711-b9f8-4d14-a097-2dd64c8a39eb" class=""><strong>Level 3 (Advanced):</strong></p><ul id="e3634154-7952-49f7-b538-258fa6ae0193" class="bulleted-list"><li style="list-style-type:disc">How can you use <code>if-else</code> to check if a number falls within a certain range, say 10 to 20?</li></ul><ul id="219df8e6-5360-4e3c-85f3-241aeed296bb" class="bulleted-list"><li style="list-style-type:disc">What are the advantages and potential drawbacks of using multiple <code>if-else</code> statements in a row?</li></ul></details></li></ul><h2 id="13912ec9-fb83-80b9-be76-f5a34894b634" class="">4.5: The <code>switch</code> Statement – Clean Multi-Choice Conditions</h2><h3 id="13912ec9-fb83-80f2-8d2a-fa8ba64d0e60" class="">Explanation</h3><p id="13912ec9-fb83-80ee-a3dd-ee61e1a885ef" class="">The <code>switch</code> statement is useful when you need to test a variable against multiple values. It’s often simpler than using a long <code>if-else if</code> ladder.</p><h3 id="13912ec9-fb83-80a8-9fac-c5f37103534b" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-8005-b793-e05b7b007ab4" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class SwitchExample {
+    public static void main(String[] args) {
+        int day = 3;
+
+        switch (day) {
+            case 1:
+                System.out.println(&quot;Monday&quot;);
+                break;
+            case 2:
+                System.out.println(&quot;Tuesday&quot;);
+                break;
+            case 3:
+                System.out.println(&quot;Wednesday&quot;);
+                break;
+            case 4:
+                System.out.println(&quot;Thursday&quot;);
+                break;
+            case 5:
+                System.out.println(&quot;Friday&quot;);
+                break;
+            default:
+                System.out.println(&quot;Weekend&quot;);
+                break;
+        }
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-8079-8a79-e75544f25c79" class="">Real-Life Example</h3><p id="13912ec9-fb83-80cc-8852-ca6c38330454" class="">Think of a <code>switch</code> statement like selecting options on a vending machine: if you press “1” for chips, “2” for soda, etc., the machine delivers the specific item.</p><hr id="13912ec9-fb83-8098-82e0-eab557966d44"/><ul id="13912ec9-fb83-8052-8998-e419b18855b2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-80ee-bb33-dfdfea8392ff" class="">Mini Task</h3><p id="13912ec9-fb83-80be-a462-f8208275e25c" class=""><strong>Task:</strong> Write a program using a <code>switch</code> statement to select a meal option (1 for breakfast, 2 for lunch, 3 for dinner) and print the selected meal.</p><ul id="13912ec9-fb83-8046-aed8-e6ddfbc28453" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="a1700645-ee47-4872-a6cc-b3f10b7fcbc7" class="">Questions</h3><p id="bf09c3f8-83ea-41f1-81f0-c37125b28520" class=""><strong>Level 1 (Beginner):</strong></p><ul id="13d7f738-0440-4acc-9b6d-f7dbd616702d" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>switch</code> statement?</li></ul><ul id="78d001ec-2750-4722-9de6-0953ef8e3bcf" class="bulleted-list"><li style="list-style-type:disc">Write a <code>switch</code> statement to print the name of a month based on a number (1 for January, etc.).</li></ul><p id="cd0c1451-efc3-4f32-929c-da3e166087fc" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="ff57a960-5b3f-4f14-9a8a-ba3388c154b1" class="bulleted-list"><li style="list-style-type:disc">How would you use <code>break</code> in a <code>switch</code> statement, and why is it important?</li></ul><ul id="765a6582-d32c-4e4e-a42d-53d22b015aca" class="bulleted-list"><li style="list-style-type:disc">Can you use conditions in a <code>switch</code> statement? If not, what alternatives are available?</li></ul><p id="0f22cf74-1340-488f-a6c4-1514bc504d64" class=""><strong>Level 3 (Advanced):</strong></p><ul id="8a117367-d3d7-475c-b8a3-b6b70a7c22fa" class="bulleted-list"><li style="list-style-type:disc">Discuss how <code>switch</code> works with different data types like <code>String</code> in Java.</li></ul><ul id="ee0bd9cb-275f-430e-ad3b-34001ca9c355" class="bulleted-list"><li style="list-style-type:disc">Can you use <code>switch</code> in situations where an <code>if-else</code> structure might be more complex? Provide an example.</li></ul></details></li></ul><hr id="13912ec9-fb83-8016-90c9-c6ef289cbf28"/><h2 id="13912ec9-fb83-80b1-a749-fcc8da2f7fda" class="">4.6: Ternary Operator – Compact Conditional Expressions</h2><h3 id="13912ec9-fb83-8089-af60-ff4af09ac2e6" class="">Explanation</h3><p id="13912ec9-fb83-8012-a252-dc383bd90e6d" class="">The ternary operator (<code>?:</code>) is a shorthand for <code>if-else</code> that assigns a value based on a condition. It follows this format: <code>condition ? value_if_true : value_if_false</code>.</p><h3 id="13912ec9-fb83-8080-a11e-d9dc81450f67" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13912ec9-fb83-802a-9d89-c0f75e98fef1" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">java
+Copy code
+public class TernaryOperatorExample {
+    public static void main(String[] args) {
+        int age = 18;
+        String result = (age &gt;= 18) ? &quot;Adult&quot; : &quot;Minor&quot;;
+        System.out.println(&quot;You are an &quot; + result);
+    }
+}
+
+</code></pre><h3 id="13912ec9-fb83-8001-859c-d65356e195dc" class="">Real-Life Example</h3><p id="13912ec9-fb83-8066-9831-f1f5a53c00be" class="">Imagine a traffic signal with a “Go” or “Stop” indicator based on whether the light is green or red. You could use the ternary operator to assign “Go” or “Stop” based on the color.</p><hr id="13912ec9-fb83-80a2-bb20-e6c742799606"/><ul id="13912ec9-fb83-8030-a30b-c8b4fbc6bb0b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13912ec9-fb83-8040-87d0-cc03d2cb155a" class="">Mini Task</h3><p id="13912ec9-fb83-8044-8a92-f8d244976c9f" class=""><strong>Task:</strong> Write a program that uses the ternary operator to check if a number is positive or negative.</p><ul id="13912ec9-fb83-80d4-accb-c55cb591ca61" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="765e2a96-fded-4d71-94a8-dbd5f789584a" class="">Questions</h3><p id="f8cdc994-2f0d-49a7-91cb-1b9a91b9b39f" class=""><strong>Level 1 (Beginner):</strong></p><ul id="45830055-a939-41a0-bbb5-b3b0afeb2522" class="bulleted-list"><li style="list-style-type:disc">How does the ternary operator work?</li></ul><ul id="c81b3eb4-e37b-4073-a110-6fdd8d4ae9ad" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>:</code> in the ternary operator?</li></ul><p id="7772cfa9-b83f-45e9-98d6-aa48097f43f0" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="00cb8aa8-0e34-4d4c-bcf4-ae49320bf059" class="bulleted-list"><li style="list-style-type:disc">Write a ternary expression to check if a number is even or odd.</li></ul><ul id="5f30cb91-1200-41f2-8fe9-61afb2379173" class="bulleted-list"><li style="list-style-type:disc">How would you use the ternary operator to assign a grade based on a score?</li></ul><p id="80fa1b24-2024-4fc2-86b4-f34dc9995d6e" class=""><strong>Level 3 (Advanced):</strong></p><ul id="517698f3-5ec7-4554-a953-9ffbd939e8f8" class="bulleted-list"><li style="list-style-type:disc">Can you nest ternary operators? What are the advantages and potential pitfalls?</li></ul><ul id="87f052b3-43d3-466a-a970-de9ec2232818" class="bulleted-list"><li style="list-style-type:disc">Explain how to use the ternary operator to select among multiple values (like &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;).</li></ul></details></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
+<!-- Navigation Section -->
+<div class="navigation">
+    <a href="step3.html" class="nav-button previous">Previous Step</a>
+    <a href="step5.html" class="nav-button next">Next Step</a>
+    <a href="submit.html" class="nav-button submit">Submit Code</a>
+</div>
+
+<style>
+    /* Layout Styling for Navigation */
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 2px solid #ddd;
+    }
+
+    /* Button Styling */
+    .nav-button {
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Specific Button Colors */
+    .nav-button.previous {
+        background-color: #f57c00; /* Orange for Previous */
+    }
+    .nav-button.next {
+        background-color: #4CAF50; /* Green for Next */
+    }
+    .nav-button.submit {
+        background-color: #2196F3; /* Blue for Submit */
+    }
+
+    /* Hover Effects */
+    .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Active/Pressed State */
+    .nav-button:active {
+        transform: translateY(1px);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+

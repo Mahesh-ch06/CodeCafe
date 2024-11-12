@@ -1,0 +1,767 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Step 2: Control Flow Statements</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="13612ec9-fb83-8062-b491-e6b97084682d" class="page sans"><header><h1 class="page-title">Step 2: Control Flow Statements</h1><p class="page-description"></p></header><div class="page-body"><p id="22d40f80-e15a-40aa-aa94-d88808af9ad4" class="">In this step, we&#x27;ll look at declaring and using variables, along with the types of operators Java provides.</p><h2 id="e823a290-21e0-4df2-8bf1-933cdb4294e0" class=""><strong>Lesson Outline:</strong></h2><ul id="694dca20-2027-455d-ae00-9fd2ad1e96ad" class="bulleted-list"><li style="list-style-type:disc"><strong>Variables:</strong> Declaration, initialization, and naming conventions.</li></ul><ul id="7f08a78e-3a60-402c-a06e-e08b64c25d58" class="bulleted-list"><li style="list-style-type:disc"><strong>Operators:</strong> Arithmetic, assignment, relational, logical, and unary operators.</li></ul><h2 id="83a8066a-3ba6-4d5f-b730-b9c7096b44fd" class="">2.1: The <code>if</code> Statement – Making Decisions</h2><h3 id="58df6227-cd85-48e2-839b-a6276a595a64" class="">Explanation</h3><p id="17f1a287-0dcf-4891-8947-5738de9581ac" class="">The <code>if</code> statement allows you to make a decision based on a condition. If the condition is true, a certain block of code will run.</p><h3 id="8fea59be-e9b0-456d-aa73-ab480facce5f" class="">Syntax</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="681a0956-c754-49e4-9c24-6b5fe7abe0a7" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">if (condition) {
+    // Code to execute if the condition is true
+}
+</code></pre></div><h3 id="3aa75b3b-e231-454d-b839-e7c879ec4ac3" class="">Real-Life Example</h3><p id="187da462-5779-4ac5-a9bd-cc14c057ebec" class="">Imagine deciding if you need an umbrella. You’ll take it only if it’s raining.</p><h3 id="612fc79c-4f77-4fc3-855a-7e0a064d5139" class="">Code Example</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="da84667e-2287-47c9-b81f-74b63460a55a" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class IfExample {
+    public static void main(String[] args) {
+        int temperature = 30;
+
+        if (temperature &gt; 25) {
+            System.out.println(&quot;It&#x27;s a hot day!&quot;);
+        }
+    }
+}
+</code></pre></div><ul id="06e75422-3d52-4e3e-beac-a54308e0c89b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="aca70919-f644-431d-93d8-c0fae4799ccb" class="">Exercise (Level 1)</h3><p id="6f40d47c-52cc-46f4-961a-ecccb924709f" class=""><strong>Problem:</strong> Write a program that checks if a number is positive. If it is, print &quot;The number is positive.&quot;</p><h3 id="badb6706-ea10-42f5-a767-de28e52ceda1" class="">Mini Task</h3><p id="6e0eaf4f-0312-4034-a06e-543d8526db03" class=""><strong>Task:</strong> Write a program that checks if a person is eligible to vote.</p><ol type="1" id="ca291c0a-91c0-4724-b16a-64007a776671" class="numbered-list" start="1"><li>Declare an integer variable <code>age</code>.</li></ol><ol type="1" id="2bb49f83-ab94-4e9a-9415-6c8fbc5f5301" class="numbered-list" start="2"><li>Set <code>age</code> to a value (e.g., 18).</li></ol><ol type="1" id="e0695ace-3620-49ca-bef3-b2c572fc6908" class="numbered-list" start="3"><li>Use an <code>if</code> statement to check if <code>age</code> is greater than or equal to 18.</li></ol><ol type="1" id="575a371e-f8ab-4e8c-b553-e70feff4fa26" class="numbered-list" start="4"><li>If true, print <code>&quot;You are eligible to vote.&quot;</code></li></ol><ul id="b22a5879-f5ca-456d-b61e-24df270d14cb" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="e929334b-9c97-4a28-861f-25b05e52f732" class="">Questions</h3><p id="34d2e00a-2641-4751-847c-71e0dba27a08" class=""><strong>Level 1 (Beginner):</strong></p><ul id="35a5b990-4019-4983-ad2c-7dc94cc3eed5" class="bulleted-list"><li style="list-style-type:disc">What does the <code>+</code> operator do when used with two numbers?</li></ul><ul id="e97390a9-6d47-4823-ad40-e69772e8ff99" class="bulleted-list"><li style="list-style-type:disc">How does the <code>%</code> operator work?</li></ul><p id="0a56758d-297b-4c8b-9ddf-cc27fe96a89a" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="86443c54-0c38-4edd-9b16-56879df76bf7" class="bulleted-list"><li style="list-style-type:disc">Can you explain the difference between <code>a = a + 5</code> and <code>a += 5</code>?</li></ul><ul id="8ec8e034-8123-4e23-ae86-ba7174b06a80" class="bulleted-list"><li style="list-style-type:disc">What would happen if you divide an integer by zero?</li></ul><p id="f8a9995a-d4c3-4e83-a07b-97c2aa9981aa" class=""><strong>Level 3 (Advanced):</strong></p><ul id="bbc7c07d-8036-4e21-8e15-78ff6e3d4d1b" class="bulleted-list"><li style="list-style-type:disc">How would Java handle <code>10 / 3</code> if <code>10</code> and <code>3</code> are both integers? What if they’re both doubles?</li></ul><ul id="eeab5603-e5d8-41f6-8238-9eb25542f990" class="bulleted-list"><li style="list-style-type:disc">What’s the difference between <code>++a</code> (prefix increment) and <code>a++</code> (postfix increment) in terms of order of operations?</li></ul></details></li></ul><h2 id="de18a30f-1d5f-452a-aa13-ad8b1f17a731" class="">2.2: Adding <code>else</code> for More Options</h2><h3 id="709ded5b-ca36-45e2-8461-ee185d6a368a" class="">Explanation</h3><p id="7406f9ce-9cdd-41c9-a72d-cdb7a29cab4f" class="">The <code>else</code> statement allows you to define what happens when the <code>if</code> condition is false.</p><h3 id="e680df7f-3f46-48f0-8e3d-20e8b5a6981b" class="">Real-Life Example</h3><p id="bfb461d8-e39d-40b7-86d9-bbe8653bb671" class="">If you want to decide what to wear based on the weather:</p><ul id="5c15237f-b0a1-4677-9f9d-33bb59d4fb3f" class="bulleted-list"><li style="list-style-type:disc">If it’s cold, you wear a jacket.</li></ul><ul id="cf13dfc7-388f-4bea-b2ff-2304e4eaf5fb" class="bulleted-list"><li style="list-style-type:disc">Otherwise, you wear a t-shirt.</li></ul><h3 id="2871ca9f-0c1a-4b46-8b02-01706282c57d" class="">Code Example</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="81eb8dcf-bf42-4f75-8afc-9602cf0c2970" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int temperature = 20;
+if (temperature &gt; 25) {
+    System.out.println(&quot;It&#x27;s a warm day.&quot;);
+} else {
+    System.out.println(&quot;It&#x27;s a cool day.&quot;);
+}</code></pre></div><ul id="aa093434-3dc1-4191-a09a-e16b773b850e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="82a1ef78-e052-43ab-981b-d7cfe139dbf2" class="">Exercise (Level 1)</h3><p id="6045d127-1cf3-43b7-86cf-0476654d0762" class=""><strong>Problem:</strong> Write a program that checks if a number is even or odd. Print &quot;Even&quot; if it&#x27;s even, otherwise print &quot;Odd.&quot;</p><h3 id="a43e8b61-8e62-4a15-bc70-62008085454d" class="">Mini Task</h3><p id="f23ade55-4735-44a8-ad4b-2be5dff08cd9" class=""><strong>Task:</strong> Write a program that checks if a person can ride a roller coaster.</p><ol type="1" id="097de887-0d17-46ba-ae61-b80243c815df" class="numbered-list" start="1"><li>Declare an integer variable <code>heightInCm</code>.</li></ol><ol type="1" id="fc5862b6-da1a-4d46-9fb6-78585828fda8" class="numbered-list" start="2"><li>Set <code>heightInCm</code> to a value (e.g., 140).</li></ol><ol type="1" id="96a5967a-08da-48a9-90ab-4e714caee4ed" class="numbered-list" start="3"><li>Use an <code>if</code> statement to check if <code>heightInCm</code> is 120 or more.</li></ol><ol type="1" id="8e910f72-e4d8-479d-b26c-8b9396002136" class="numbered-list" start="4"><li>If true, print <code>&quot;You can ride the roller coaster!&quot;</code></li></ol><ol type="1" id="d498f41e-8158-4748-ab8a-141d220bbb0a" class="numbered-list" start="5"><li>If false, print <code>&quot;You need to be taller to ride.&quot;</code></li></ol><ul id="c3d76e7c-fddd-45c1-85bc-c422c36a38f8" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="3b60c875-8aaa-4f97-b97b-66af9dcf653a" class="">Questions</h3><p id="dba198fe-c2c8-44f2-8d83-d82189b03245" class=""><strong>Level 1 (Beginner):</strong></p><ul id="77fa5378-74b2-4f1e-b4df-2f9cbb90d435" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of <code>else</code>?</li></ul><ul id="a7993999-89a1-4b6d-a7b3-16561ab3ed11" class="bulleted-list"><li style="list-style-type:disc">Write a basic <code>if-else</code> statement for checking if a number is even or odd.</li></ul><p id="3c1368a2-b6ba-4ef0-8ef6-0fc069c989fe" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="01a9249a-d6c5-4eb5-834c-8c2a1c5b268d" class="bulleted-list"><li style="list-style-type:disc">Can you use <code>else</code> without an <code>if</code>?</li></ul><ul id="9362e520-86c5-42ac-b32e-3b77103cfc5f" class="bulleted-list"><li style="list-style-type:disc">How would you use <code>if-else</code> to check if a person is eligible for a senior discount?</li></ul><p id="ef2f3619-ad6c-4758-be3b-fa690fe2bf00" class=""><strong>Level 3 (Advanced):</strong></p><ul id="62321644-39de-4f1a-8ebc-f0fee4a6ec43" class="bulleted-list"><li style="list-style-type:disc">What happens if there are multiple <code>else</code> statements in a row?</li></ul><ul id="c2466929-a978-42e1-aa77-4520b55b7a89" class="bulleted-list"><li style="list-style-type:disc">How does the JVM decide which block to execute in an <code>if-else</code> statement?</li></ul></details></li></ul><h2 id="cf7430cb-24b6-4c0f-a1e1-d7e6e116f1a1" class="">2.3: The <code>else if</code> Ladder for Multiple Conditions</h2><h3 id="fce09cdb-88b8-469a-aafc-6edb30ce3811" class="">Explanation</h3><p id="af33fede-cecb-415b-947d-3e7d23020945" class="">The <code>else if</code> ladder allows you to check multiple conditions in a sequence. Each <code>else if</code> checks a new condition if the previous ones are false.</p><h3 id="eb2027bc-0f81-4903-a802-e41c04ba6f3c" class="">Real-Life Example</h3><p id="0c4b8585-ed55-475e-9a15-dc439ad04908" class="">Imagine you’re categorizing people by age:</p><ul id="2be5dd5c-363a-414a-8488-a15c39223018" class="bulleted-list"><li style="list-style-type:disc">Children: age &lt; 13</li></ul><ul id="dbe91dd2-7ec1-4e13-9d54-7e8deee18074" class="bulleted-list"><li style="list-style-type:disc">Teens: 13 &lt;= age &lt; 18</li></ul><ul id="a27b6fc8-41fd-4a5c-9a6f-4ad4ca881a8f" class="bulleted-list"><li style="list-style-type:disc">Adults: age &gt;= 18</li></ul><h3 id="62e6051e-568f-4c30-af0e-c0ae7f51aaf2" class="">Code Example</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="16436195-d650-45f1-87a2-91eee1bd1c1c" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">int age = 16;
+if (age &lt; 13) {
+    System.out.println(&quot;Child&quot;);
+} else if (age &lt; 18) {
+    System.out.println(&quot;Teen&quot;);
+} else {
+    System.out.println(&quot;Adult&quot;);
+}</code></pre><ul id="35b19081-6969-45a6-b196-1e77bc639df5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="f4f43295-2a16-4d7a-a448-574ced2d60ed" class="">Exercise (Level 2)</h3><p id="daeb4544-34fa-4bd8-b458-2f6291527096" class=""><strong>Problem:</strong> Write a program that categorizes numbers into three groups:</p><ul id="a619a0f5-4450-4883-b998-23a80c547e20" class="bulleted-list"><li style="list-style-type:disc">&quot;Negative&quot; if the number is less than 0</li></ul><ul id="8c5fe4a4-1488-4ea1-a6cd-8b48f61f0ae9" class="bulleted-list"><li style="list-style-type:disc">&quot;Zero&quot; if the number is 0</li></ul><ul id="6adb24a2-defc-470f-8ac5-b69b2f8cdd4c" class="bulleted-list"><li style="list-style-type:disc">&quot;Positive&quot; if the number is greater than 0</li></ul><h3 id="b69bc902-c6ec-4468-97c9-201a64f84a05" class="">Mini Task</h3><p id="b938a36f-a134-4618-b9d9-061f698886d0" class=""><strong>Task:</strong> Write a program that categorizes a person&#x27;s BMI (Body Mass Index).</p><ol type="1" id="44c798e1-b55b-4770-b7f5-1c5df30a96dc" class="numbered-list" start="1"><li>Declare a double variable <code>bmi</code> and assign it a value.</li></ol><ol type="1" id="b552434e-0051-4756-bfeb-77cbe3dfde5d" class="numbered-list" start="2"><li>Use an <code>if</code>, <code>else if</code>, <code>else</code> ladder to categorize the BMI:<ul id="93a54586-5743-421f-b3ca-eb456f36a9eb" class="bulleted-list"><li style="list-style-type:disc">If <code>bmi &lt; 18.5</code>, print <code>&quot;Underweight&quot;</code>.</li></ul><ul id="f5ab12cc-e10f-44ea-99ff-ac587dd98b8c" class="bulleted-list"><li style="list-style-type:disc">If <code>bmi &gt;= 18.5 &amp;&amp; bmi &lt; 24.9</code>, print <code>&quot;Normal weight&quot;</code>.</li></ul><ul id="15d22c0a-e04d-46f8-874e-81af9518092e" class="bulleted-list"><li style="list-style-type:disc">If <code>bmi &gt;= 25 &amp;&amp; bmi &lt; 29.9</code>, print <code>&quot;Overweight&quot;</code>.</li></ul><ul id="af1a8132-9cf8-4ff4-b610-2360aea1ac99" class="bulleted-list"><li style="list-style-type:disc">Otherwise, print <code>&quot;Obese&quot;</code>.</li></ul></li></ol><ol type="1" id="13a7331c-16fd-4bda-8d29-28ff21217619" class="numbered-list" start="3"><li>Write a program to categorize a person’s age:</li></ol><ul id="423fcea9-3576-46a7-af34-58662b6cd096" class="bulleted-list"><li style="list-style-type:disc"><code>age &lt; 13</code>: <code>&quot;Child&quot;</code></li></ul><ul id="c3cc6114-1afd-4d46-b3e1-7ac2943cc981" class="bulleted-list"><li style="list-style-type:disc"><code>13 &lt;= age &lt; 18</code>: <code>&quot;Teenager&quot;</code></li></ul><ul id="8bb65223-be2c-47cf-bbcc-9560207ed0d5" class="bulleted-list"><li style="list-style-type:disc"><code>18 &lt;= age &lt; 65</code>: <code>&quot;Adult&quot;</code></li></ul><ul id="3131d630-d741-4a8f-8c1f-10344681935b" class="bulleted-list"><li style="list-style-type:disc"><code>age &gt;= 65</code>: <code>&quot;Senior&quot;</code></li></ul><ul id="85a750f2-6818-47b7-bbbd-a34da795137a" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="97c48bf2-edd5-40c9-b097-7327967a1be5" class="">Questions</h3><p id="54fe58ed-4a60-4cdf-af3e-2d9b685146ef" class=""><strong>Level 1 (Beginner):</strong></p><ul id="db6a92f0-6707-4825-a887-b0569a2a9cb1" class="bulleted-list"><li style="list-style-type:disc">What does <code>else if</code> do?</li></ul><ul id="dc585225-8d27-487f-bcf5-3104ee246b67" class="bulleted-list"><li style="list-style-type:disc">Can <code>else if</code> exist without a preceding <code>if</code>?</li></ul><p id="3c888dac-6be1-4f78-890c-7a28531e7dab" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="64d53560-f393-44a4-add0-5a0fac913e6e" class="bulleted-list"><li style="list-style-type:disc">How is <code>else if</code> different from <code>if</code>?</li></ul><ul id="036b85cd-8883-4580-aeee-6409282a944b" class="bulleted-list"><li style="list-style-type:disc">How many <code>else if</code> statements can you use in a row?</li></ul><p id="7ff6c40b-e459-4793-a15c-b2c2681f077a" class=""><strong>Level 3 (Advanced):</strong></p><ul id="dca12b94-a556-42f1-85fa-fc0cf7a671f8" class="bulleted-list"><li style="list-style-type:disc">What’s the difference in performance between using multiple <code>if-else</code> and <code>else if</code> statements?</li></ul><ul id="ccc65aae-fa36-4744-a5b5-7c2afd8dcce5" class="bulleted-list"><li style="list-style-type:disc">How does Java evaluate complex nested <code>else if</code> conditions?</li></ul></details></li></ul><p id="13612ec9-fb83-80f5-bde5-ef4a1d9bd0f6" class="">
+</p><p id="13612ec9-fb83-804e-b111-cf261e3f9695" class="">
+</p><figure id="13612ec9-fb83-80ba-ad39-fd523a46ff80" class="link-to-page"><a href="Step%203%20Looping%20with%20for,%20while,%20and%20do-while%2013612ec9fb8380baad39fd523a46ff80.html">Step 3: Looping with for, while, and do-while</a></figure><p id="13612ec9-fb83-8016-bc71-de2bb22eb231" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
+<!-- Navigation Section -->
+<div class="navigation">
+    <a href="step1.html" class="nav-button previous">Previous Step</a>
+    <a href="step3.html" class="nav-button next">Next Step</a>
+    <a href="submit.html" class="nav-button submit">Submit Code</a>
+</div>
+
+<style>
+    /* Layout Styling for Navigation */
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 2px solid #ddd;
+    }
+
+    /* Button Styling */
+    .nav-button {
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Specific Button Colors */
+    .nav-button.previous {
+        background-color: #f57c00; /* Orange for Previous */
+    }
+    .nav-button.next {
+        background-color: #4CAF50; /* Green for Next */
+    }
+    .nav-button.submit {
+        background-color: #2196F3; /* Blue for Submit */
+    }
+
+    /* Hover Effects */
+    .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Active/Pressed State */
+    .nav-button:active {
+        transform: translateY(1px);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+

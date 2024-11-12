@@ -1,0 +1,787 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Java Basics and Syntax</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="13512ec9-fb83-8053-8909-f810219468db" class="page sans"><header><h1 class="page-title">Java Basics and Syntax</h1><p class="page-description"></p></header><div class="page-body"><p id="13512ec9-fb83-8083-b455-f28176cd6aeb" class="">Let’s start with the core structure of a Java program and basic syntax, such as defining classes, methods, and understanding data types.</p><h2 id="13512ec9-fb83-80eb-a99a-cae0a47361e1" class="">Lesson Outline:</h2><ul id="13512ec9-fb83-806f-8517-c8a76fce0311" class="bulleted-list"><li style="list-style-type:disc"><strong>Structure of a Java Program:</strong> Classes, methods, and the <code>main</code> method.</li></ul><ul id="13512ec9-fb83-80e9-ac79-c16b857d1c04" class="bulleted-list"><li style="list-style-type:disc"><strong>Basic Syntax:</strong> Keywords, identifiers, and code blocks.</li></ul><ul id="13512ec9-fb83-801a-934a-eb1b934928a3" class="bulleted-list"><li style="list-style-type:disc"><strong>Data Types:</strong> Primitive types (int, float, boolean, etc.).</li></ul><h2 id="13512ec9-fb83-8053-9af2-d987cfd192e8" class="">1.1: Basic Structure of a Java Program</h2><h3 id="13512ec9-fb83-801b-bc06-d1eb77db7665" class="">Explanation</h3><p id="13512ec9-fb83-80ac-8ec2-e92ebff2594e" class="">In Java, every program consists of <strong>classes</strong> and <strong>methods</strong>:</p><ul id="13512ec9-fb83-80dd-8417-e31296909f2a" class="bulleted-list"><li style="list-style-type:disc"><strong>Class</strong>: A class is like a blueprint or template for creating an object (just like a recipe is a template for making a dish).</li></ul><ul id="13512ec9-fb83-8003-b681-f81ea6fac693" class="bulleted-list"><li style="list-style-type:disc"><strong>Main Method</strong>: The <code>main</code> method is the entry point for the program; it&#x27;s where the program starts running. Think of it as the &quot;go button&quot; of a machine.</li></ul><h3 id="13512ec9-fb83-80fc-8bf0-e6594e2e5132" class="">Code Structure</h3><p id="13512ec9-fb83-801b-9028-f1e887111c23" class="">Here’s the simplest structure of a Java program:</p><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13512ec9-fb83-8041-99e8-f8490a3718cf" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class MyFirstProgram {  // This is the class
+    public static void main(String[] args) {  // This is the main method
+        System.out.println(&quot;Hello, Java!&quot;);  // This line prints a message
+    }
+}</code></pre></div><h3 id="13512ec9-fb83-800a-b534-e135cf5ceded" class="">Explanation of Each Part</h3><ol type="1" id="13512ec9-fb83-80bc-b445-d3983cb82def" class="numbered-list" start="1"><li><code>public class MyFirstProgram</code>: This line defines a class named <code>MyFirstProgram</code>. You can think of this as defining a type of &quot;machine&quot; or &quot;template.&quot;</li></ol><ol type="1" id="13512ec9-fb83-801d-bc26-e68d1c1f79e5" class="numbered-list" start="2"><li><code>public static void main(String[] args)</code>: This is the main method, which acts like the machine’s start button.</li></ol><ol type="1" id="13512ec9-fb83-803c-a12f-efbcea8ac648" class="numbered-list" start="3"><li><code>System.out.println(&quot;Hello, Java!&quot;);</code>: This line tells the program to print a message on the screen.</li></ol><h3 id="13512ec9-fb83-8059-a60c-c67a90064258" class="">Real-Life Example</h3><p id="13512ec9-fb83-8028-ba3c-e2eb99a27371" class="">Think of a Java program like a coffee machine:</p><ul id="13512ec9-fb83-80bb-9a32-c6008c68977e" class="bulleted-list"><li style="list-style-type:disc"><strong>Class</strong> (<code>MyFirstProgram</code>): The design of the coffee machine.</li></ul><ul id="13512ec9-fb83-80b4-8599-fd14cae17e8e" class="bulleted-list"><li style="list-style-type:disc"><strong>Main Method</strong>: The &quot;Start&quot; button on the machine.</li></ul><ul id="13512ec9-fb83-8028-ab4e-c02fe5840e72" class="bulleted-list"><li style="list-style-type:disc"><strong>Print Statement</strong>: The machine printing a message, like &quot;Coffee is ready!&quot; when it’s done.</li></ul><p id="13512ec9-fb83-8066-9fd8-c0a156aa8c0f" class="">
+</p><ul id="13512ec9-fb83-8046-9e7a-d7421af69d89" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13512ec9-fb83-808a-9c9c-f32efcba0381" class="">Exercise (Level 1)</h3><p id="13512ec9-fb83-8090-bd3a-c5458bfbd195" class=""><strong>Problem:</strong> Modify the program to print your name. Change <code>&quot;Hello, Java!&quot;</code> to <code>&quot;Hello, [Your Name]!&quot;</code>.</p><h3 id="13512ec9-fb83-8060-8b63-c19a0893b2de" class="">Mini Task</h3><p id="13512ec9-fb83-8094-a15a-f03740a83b05" class=""><strong>Task:</strong> Create a new Java class named <code>Introduction</code>. Inside the <code>main</code> method, display the message: <code>&quot;Hello, welcome to learning Java!&quot;</code></p><ul id="13612ec9-fb83-800e-954d-dfb3be12f28f" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="13612ec9-fb83-80dc-9dc1-e9e852a19535" class="">Questions</h3><p id="13612ec9-fb83-8033-a1a6-e866cd01ab8d" class=""><strong>Level 1 (Beginner):</strong></p><ul id="13612ec9-fb83-80f9-a910-e2bfa62b5693" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>class</code> keyword in Java?</li></ul><ul id="13612ec9-fb83-80a2-9352-c02f3fa417b4" class="bulleted-list"><li style="list-style-type:disc">What is the purpose of the <code>main</code> method?</li></ul><p id="13612ec9-fb83-801f-9441-fdcf16a4f4aa" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="13612ec9-fb83-802b-b351-e8c5633ae715" class="bulleted-list"><li style="list-style-type:disc">Why do we need a <code>main</code> method in every Java application?</li></ul><ul id="13612ec9-fb83-80d9-864c-c1c56cfea0b9" class="bulleted-list"><li style="list-style-type:disc">What happens if you remove <code>public</code> from <code>public class</code>?</li></ul><p id="13612ec9-fb83-8032-844b-d58bcff900a4" class=""><strong>Level 3 (Advanced):</strong></p><ul id="13612ec9-fb83-80a4-af78-c90b67fba5e8" class="bulleted-list"><li style="list-style-type:disc">How does the Java Virtual Machine (JVM) locate and execute the <code>main</code> method?</li></ul><ul id="13612ec9-fb83-8077-b58d-d362f7771bb5" class="bulleted-list"><li style="list-style-type:disc">What would happen if there were two <code>main</code> methods in different classes?</li></ul></details></li></ul><p id="13612ec9-fb83-8054-8919-e52467d7a50d" class="">
+</p><h2 id="13512ec9-fb83-8002-aa8b-f6d2f4658389" class=""><br/>1.2: Understanding <br/><code>System.out.println</code></h2><h3 id="13512ec9-fb83-8030-b5bd-eb3f7381e72a" class="">Explanation</h3><p id="13512ec9-fb83-803a-beb9-ca4a03309500" class=""><code>System.out.println</code> is used to display information on the screen. It’s the basic way to output text or results.</p><ul id="13512ec9-fb83-8071-8f37-ddff3e053878" class="bulleted-list"><li style="list-style-type:disc"><code><strong>System</strong></code>: Refers to the system environment where the program runs.</li></ul><ul id="13512ec9-fb83-8000-9f4c-eb1715495808" class="bulleted-list"><li style="list-style-type:disc"><code><strong>out</strong></code>: A predefined output object in Java.</li></ul><ul id="13512ec9-fb83-8043-8ae4-fd82902c1cc2" class="bulleted-list"><li style="list-style-type:disc"><code><strong>println</strong></code>: Means &quot;print line.&quot; It displays text and moves to the next line.</li></ul><h3 id="13512ec9-fb83-80a5-be4d-d57ec0c8a943" class="">Code Example</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13512ec9-fb83-8084-b3c1-e8537d03f36d" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class PrintExample {
+    public static void main(String[] args) {
+        System.out.println(&quot;Learning Java!&quot;);
+        System.out.println(&quot;This is fun!&quot;);
+    }
+}
+</code></pre></div><p id="13512ec9-fb83-8030-bdd2-cf4aa7fcf9f0" class="">
+</p><ul id="13512ec9-fb83-8097-9805-c108e67d31f6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13512ec9-fb83-805f-b382-e3ce21783d7b" class="">Real-Life Example</h3><p id="13512ec9-fb83-80f0-9c7b-cbcfdb31a7b8" class="">Imagine <code>System.out.println</code> as the display on an ATM machine. Each message shown (like &quot;Please enter your PIN&quot;) is similar to a <code>println</code> command.</p><h3 id="13512ec9-fb83-8062-b2c4-ece452bf9c8b" class="">Exercise (Level 1)</h3><p id="13512ec9-fb83-805d-9c21-d34e41754f64" class=""><strong>Problem:</strong> Write a program that prints three different messages (like your name, age, and favorite color) on separate lines.</p><h3 id="13612ec9-fb83-80b7-a1fe-ea96a1cd32ca" class="">Mini Task</h3><p id="13612ec9-fb83-8029-bfbb-f113a6162738" class=""><strong>Task:</strong> Write a program that introduces you. Display three lines of output:</p><ol type="1" id="13612ec9-fb83-80e6-967e-e93814a70cae" class="numbered-list" start="1"><li>Your name.</li></ol><ol type="1" id="13612ec9-fb83-80bd-84a6-d30eb54a66cb" class="numbered-list" start="2"><li>Your favorite hobby.</li></ol><ol type="1" id="13612ec9-fb83-809b-859e-c80624a22815" class="numbered-list" start="3"><li>Your favorite color.</li></ol><ul id="13612ec9-fb83-80c4-9a03-de93f4d020e1" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="13612ec9-fb83-8022-9efe-ff2feda070da" class="">Questions</h3><p id="13612ec9-fb83-803a-b14e-edeb18519dcd" class=""><strong>Level 1 (Beginner):</strong></p><ul id="13612ec9-fb83-80d0-ab74-cef139909ded" class="bulleted-list"><li style="list-style-type:disc">What does <code>System.out.println</code> do?</li></ul><ul id="13612ec9-fb83-8048-84b2-ce532db2302e" class="bulleted-list"><li style="list-style-type:disc">How is <code>System.out.println</code> different from <code>System.out.print</code>?</li></ul><p id="13612ec9-fb83-80db-9aea-fb2158867dc5" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="13612ec9-fb83-8023-906b-e0356c7b0641" class="bulleted-list"><li style="list-style-type:disc">Can you print multiple lines using a single <code>System.out.println</code> statement?</li></ul><ul id="13612ec9-fb83-80e6-b8db-f619f902d952" class="bulleted-list"><li style="list-style-type:disc">Why do we need to end each statement with a semicolon (<code>;</code>)?</li></ul><p id="13612ec9-fb83-80c4-82e0-c2fe7ddb5902" class=""><strong>Level 3 (Advanced):</strong></p><ul id="13612ec9-fb83-80f4-826b-de0d76b455f1" class="bulleted-list"><li style="list-style-type:disc">Explain what each part of <code>System.out.println</code> refers to (<code>System</code>, <code>out</code>, <code>println</code>).</li></ul><ul id="13612ec9-fb83-80f9-8c4e-d051474d2f12" class="bulleted-list"><li style="list-style-type:disc">What is the difference between <code>System.out.println</code> and <code>System.err.println</code>?</li></ul></details></li></ul><h2 id="13512ec9-fb83-80d5-a5dd-e96a4216aa70" class="">1.3: Declaring Variables – Storing Information</h2><h3 id="13512ec9-fb83-8091-8674-dbeb19e45242" class="">Explanation</h3><p id="13512ec9-fb83-803e-917f-f5ecb4e7b6c9" class="">Variables store data that can be used in your program. Think of them like labeled storage boxes for different values:</p><ul id="13512ec9-fb83-809e-8644-d47fb5e3ca20" class="bulleted-list"><li style="list-style-type:disc"><code><strong>int</strong></code>: Used to store whole numbers (e.g., 5, 100).</li></ul><ul id="13512ec9-fb83-80b0-bb58-de1b5cc83dc8" class="bulleted-list"><li style="list-style-type:disc"><code><strong>String</strong></code>: Used to store text (e.g., &quot;Hello&quot;, &quot;Java&quot;).</li></ul><ul id="13512ec9-fb83-808c-9579-ce245b2a1cb7" class="bulleted-list"><li style="list-style-type:disc"><code><strong>double</strong></code>: Used to store decimal numbers (e.g., 5.5, 99.99).</li></ul><h3 id="13512ec9-fb83-806a-b273-fd150699569f" class="">Code Example</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13512ec9-fb83-8076-9887-cafe757a2386" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class VariableExample {
+    public static void main(String[] args) {
+        int age = 18;  // Storing age as a whole number
+        String name = &quot;Mahesh&quot;;  // Storing name as text
+        double height = 5.8;  // Storing height as a decimal number
+
+        System.out.println(&quot;Name: &quot; + name);
+        System.out.println(&quot;Age: &quot; + age);
+        System.out.println(&quot;Height: &quot; + height);
+    }
+}
+</code></pre></div><p id="13512ec9-fb83-80dd-991b-e66ab5233212" class="">
+</p><ul id="13512ec9-fb83-8092-8787-ccd0dc83def2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13512ec9-fb83-80af-82be-e98e1521a23f" class="">Real-Life Example</h3><p id="13512ec9-fb83-80ef-a9a7-f94636fbe20d" class="">Think of each variable like a box labeled with what it holds:</p><ul id="13512ec9-fb83-8067-ac9c-c15e869a00b0" class="bulleted-list"><li style="list-style-type:disc">A box labeled &quot;name&quot; that stores the text &quot;Mahesh.&quot;</li></ul><ul id="13512ec9-fb83-80bf-8583-e56e5e994741" class="bulleted-list"><li style="list-style-type:disc">A box labeled &quot;age&quot; that stores the number 18.</li></ul><h3 id="13512ec9-fb83-801f-a280-cbcd8394946b" class="">Exercise (Level 1)</h3><p id="13512ec9-fb83-8080-8be4-d16bed2b4c5f" class=""><strong>Problem:</strong> Declare variables for your favorite movie, your current city, and a lucky number. Print each one on a new line.</p><h3 id="13612ec9-fb83-80b9-a230-d15e1dd4d51c" class="">Mini Task</h3><p id="13612ec9-fb83-804f-86b6-d2982e558b90" class=""><strong>Task:</strong> Write a program that declares and initializes variables for:</p><ol type="1" id="13612ec9-fb83-80bb-a1c9-dfa89458c9ec" class="numbered-list" start="1"><li>Your age (integer).</li></ol><ol type="1" id="13612ec9-fb83-8065-bfe4-cc322800bc12" class="numbered-list" start="2"><li>Your height in meters (decimal number).</li></ol><ol type="1" id="13612ec9-fb83-80cc-a8b8-e26a3a72d55d" class="numbered-list" start="3"><li>Your favorite food (text).</li></ol><p id="13612ec9-fb83-8015-b7fd-d82e23f5ef1e" class="">Then, display each variable’s value on a new line using <code>System.out.println</code>.</p><ul id="13612ec9-fb83-80c9-828e-eefb20e85631" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="2bc33aeb-c9a4-4e32-95c9-26e9f390fe22" class="">Questions</h3><p id="8415ba73-3287-4bc9-abb0-dda242ef4932" class=""><strong>Level 1 (Beginner):</strong></p><ul id="e7df10cb-c07a-403d-a0b1-78e21da6e61f" class="bulleted-list"><li style="list-style-type:disc">What is a variable?</li></ul><ul id="a434167b-d802-484c-a1d6-3aeea369bccc" class="bulleted-list"><li style="list-style-type:disc">What data type would you use to store your age?</li></ul><p id="4b8004ab-f711-43ec-88f1-04ae2f291a77" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="79e9fad7-e535-4400-8fe7-f198b603c05d" class="bulleted-list"><li style="list-style-type:disc">Can a variable name start with a number?</li></ul><ul id="442f858b-ef65-4dd4-904c-a699ba9ffbd5" class="bulleted-list"><li style="list-style-type:disc">What’s the difference between <code>int</code> and <code>double</code>?</li></ul><p id="0045c16e-65ea-4994-bdd3-446298abfe38" class=""><strong>Level 3 (Advanced):</strong></p><ul id="026c5032-f5e9-489e-a048-03b320fa4ca8" class="bulleted-list"><li style="list-style-type:disc">How does Java allocate memory for different data types?</li></ul><ul id="1f5bfffc-9cbf-4f73-b21b-9499e1d28ec1" class="bulleted-list"><li style="list-style-type:disc">Explain the difference between <code>float</code> and <code>double</code>.</li></ul></details></li></ul><h2 id="13512ec9-fb83-8085-ac6c-ec85b2f8e45a" class="">1.4: Basic Operations with Variables</h2><h3 id="13512ec9-fb83-80a1-b2b5-e4bee7260a06" class="">Explanation</h3><p id="13512ec9-fb83-80c0-98b6-e5592e039917" class="">Once you have variables, you can perform operations on them:</p><ul id="13512ec9-fb83-804f-86fe-e7e133a288ba" class="bulleted-list"><li style="list-style-type:disc"><strong>Addition</strong> (<code>+</code>): Adds numbers or joins text.</li></ul><ul id="13512ec9-fb83-80fe-9293-d903cfb7cd6d" class="bulleted-list"><li style="list-style-type:disc"><strong>Subtraction</strong> (<code></code>), <strong>Multiplication</strong> (<code></code>), <strong>Division</strong> (<code>/</code>): Perform arithmetic with numbers.</li></ul><ul id="13612ec9-fb83-8089-b8d8-f51f094645b2" class="bulleted-list"><li style="list-style-type:disc"><strong>Arithmetic Operators</strong>: Used for basic math (<code>+</code>, <code></code>, <code></code>, <code>/</code>, <code>%</code>).</li></ul><ul id="13612ec9-fb83-8002-950d-e9b029d58f0a" class="bulleted-list"><li style="list-style-type:disc"><strong>Assignment Operators</strong>: Used to assign values (<code>=</code>, <code>+=</code>, <code>=</code>, etc.).</li></ul><h3 id="13512ec9-fb83-8019-8fc1-e8350e94e8b5" class="">Code Example</h3><div><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="13512ec9-fb83-806f-8702-e6d73ca4d46f" class="code"><code class="language-Java" style="white-space:pre-wrap;word-break:break-all">public class OperationsExample {
+    public static void main(String[] args) {
+        int num1 = 10;
+        int num2 = 5;
+
+        // Addition
+        int sum = num1 + num2;
+        System.out.println(&quot;Sum: &quot; + sum);
+
+        // Subtraction
+        int difference = num1 - num2;
+        System.out.println(&quot;Difference: &quot; + difference);
+
+        // Multiplication
+        int product = num1 * num2;
+        System.out.println(&quot;Product: &quot; + product);
+
+        // Division
+        int quotient = num1 / num2;
+        System.out.println(&quot;Quotient: &quot; + quotient);
+    }
+}
+</code></pre></div><h3 id="13512ec9-fb83-8086-aa51-c8b6dbc0759b" class="">Real-Life Example</h3><p id="13512ec9-fb83-80e6-be34-f8398c5e77b9" class="">Imagine you’re keeping track of items in a store. You can use addition to add items, subtraction if you sell some, and division if you need to split items into groups.</p><p id="13612ec9-fb83-805a-b405-e8097d91da63" class="">Imagine arithmetic operators as simple calculations in daily life:</p><ul id="13612ec9-fb83-8092-a838-e5c8c51b9442" class="bulleted-list"><li style="list-style-type:disc"><code>+</code> could represent adding money to a savings account.</li></ul><ul id="13612ec9-fb83-80c9-925e-d1469f1874f8" class="bulleted-list"><li style="list-style-type:disc"><code></code> could represent withdrawing money.</li></ul><ul id="13612ec9-fb83-80ba-ab87-c1d182351ee5" class="bulleted-list"><li style="list-style-type:disc"><code></code> and <code>/</code> could represent splitting or pooling resources among friends.</li></ul><p id="13512ec9-fb83-808b-88fc-e92668e5acc1" class="">
+</p><ul id="13512ec9-fb83-806a-8aba-f86a60b272c4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task</span><div class="indented"></div></li></ul><h3 id="13512ec9-fb83-803a-92f3-e1c69fc6df07" class="">Exercise (Level 1)</h3><p id="13512ec9-fb83-805b-8e8d-e4f9c0e43060" class=""><strong>Problem:</strong> Create a program that declares two numbers, adds them, subtracts them, and prints the results.</p><h3 id="13612ec9-fb83-80b1-8f29-f3d57623f40f" class="">Mini Task</h3><p id="13612ec9-fb83-8021-97a2-f507ed01c5e8" class=""><strong>Task:</strong> Write a program that does the following:</p><ol type="1" id="13612ec9-fb83-8023-ba23-c3db897aedd5" class="numbered-list" start="1"><li>Declare two integer variables, <code>priceOfItem1</code> and <code>priceOfItem2</code>.</li></ol><ol type="1" id="13612ec9-fb83-80a3-b0e3-f6998dd9a0cf" class="numbered-list" start="2"><li>Assign values to both variables (e.g., 20 and 30).</li></ol><ol type="1" id="13612ec9-fb83-8041-bacb-dd58455149a5" class="numbered-list" start="3"><li>Calculate the total cost by adding both values and print it.</li></ol><ol type="1" id="13612ec9-fb83-8070-84d9-fc8763515dee" class="numbered-list" start="4"><li>Calculate the difference in prices and print it.</li></ol><ul id="13612ec9-fb83-80e7-bdd9-fe8f6dd0512f" class="toggle"><li><details open=""><summary><strong>FOR MORE QUESTIONS</strong></summary><h3 id="13612ec9-fb83-8031-bd67-c4a5acbbbf96" class="">Questions</h3><p id="13612ec9-fb83-8050-a28a-f9e11749deb2" class=""><strong>Level 1 (Beginner):</strong></p><ul id="13612ec9-fb83-8053-baf6-db41c64a50d9" class="bulleted-list"><li style="list-style-type:disc">What does the <code>+</code> operator do when used with two numbers?</li></ul><ul id="13612ec9-fb83-803a-8188-c08845cfb7ae" class="bulleted-list"><li style="list-style-type:disc">How does the <code>%</code> operator work?</li></ul><p id="13612ec9-fb83-8027-921a-f1ec7ebb265f" class=""><strong>Level 2 (Intermediate):</strong></p><ul id="13612ec9-fb83-8045-b534-c079c154fc30" class="bulleted-list"><li style="list-style-type:disc">Can you explain the difference between <code>a = a + 5</code> and <code>a += 5</code>?</li></ul><ul id="13612ec9-fb83-803d-ad24-d09ee1c816f2" class="bulleted-list"><li style="list-style-type:disc">What would happen if you divide an integer by zero?</li></ul><p id="13612ec9-fb83-8052-bf4f-feaca223b2f8" class=""><strong>Level 3 (Advanced):</strong></p><ul id="13612ec9-fb83-8069-ac94-e36234f82339" class="bulleted-list"><li style="list-style-type:disc">How would Java handle <code>10 / 3</code> if <code>10</code> and <code>3</code> are both integers? What if they’re both doubles?</li></ul><ul id="13612ec9-fb83-80cc-b192-e28a5ef437db" class="bulleted-list"><li style="list-style-type:disc">What’s the difference between <code>++a</code> (prefix increment) and <code>a++</code> (postfix increment) in terms of order of operations?</li></ul></details></li></ul><p id="13612ec9-fb83-80bb-afc4-f88c13c1dc09" class="">
+
+<!-- Navigation Section -->
+<div class="navigation">
+    <a href="step1.html" class="nav-button previous">Previous Step</a>
+    <a href="step2.html" class="nav-button next">Next Step</a>
+    <a href="submit.html" class="nav-button submit">Submit Code</a>
+</div>
+
+<style>
+    /* Layout Styling for Navigation */
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 2px solid #ddd;
+    }
+
+    /* Button Styling */
+    .nav-button {
+        padding: 12px 24px;
+        font-size: 16px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Specific Button Colors */
+    .nav-button.previous {
+        background-color: #f57c00; /* Orange for Previous */
+    }
+    .nav-button.next {
+        background-color: #4CAF50; /* Green for Next */
+    }
+    .nav-button.submit {
+        background-color: #2196F3; /* Blue for Submit */
+    }
+
+    /* Hover Effects */
+    .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Active/Pressed State */
+    .nav-button:active {
+        transform: translateY(1px);
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
