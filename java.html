@@ -325,7 +325,7 @@
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
 
-      const percent = (progress.completed / progress.total) * 33;
+      const percent = (progress.completed / progress.total) * 100;
 
       document.getElementById('completed').textContent = progress.completed;
       document.getElementById('percent').textContent = `${percent.toFixed(1)}%`;
