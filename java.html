@@ -419,23 +419,30 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       <h2>Courses</h2>
       <div class="course-section">
         <div class="section-header" onclick="toggleSection(this)">
-          <span>Step 1: Basics</span>
+          <span>Step 1: Java Basics and Syntax</span>
           <span>+</span>
         </div>
         <div class="section-content">
           <div class="task">
             <label>
-              <input type="checkbox" onclick="updateProgress()"> Loops
+              <input type="checkbox" onclick="updateProgress()"> Basic Structure of a Java Program
               <span class="difficulty easy">Easy</span>
             </label>
             <button class="notes-btn" onclick="manageNotes('Loops')">Notes</button>
           </div>
           <div class="task">
             <label>
-              <input type="checkbox" onclick="updateProgress()"> Conditional Statements
-              <span class="difficulty medium">Medium</span>
+              <input type="checkbox" onclick="updateProgress()"> Understanding 
+              <span class="difficulty easy">Easy</span>
             </label>
             <button class="notes-btn" onclick="manageNotes('Conditional Statements')">Notes</button>
+          </div>
+          <div class="task">
+            <label>
+              <input type="checkbox" onclick="updateProgress()"> Declaring Variables 
+              <span class="difficulty easy">Easy</span>
+            </label>
+            <button class="notes-btn" onclick="manageNotes('Declaring Variables')">Notes</button>
           </div>
         </div>
         <!-- Step 2 -->
@@ -566,8 +573,9 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       if (task === 'Loops') {
         url = "https://mahesh06.me/CodeCafe/step1";
       } else if (task === 'Conditional Statements') {
-        url = "http://mahesh06.me/CodeCafe/step2";
-      }
+        url = "http://mahesh06.me/CodeCafe/step1";
+      } else if(task === 'Declaring Variables') {
+        url = "http://mahesh06.me/CodeCafe/step1";
 
       // Navigate to the appropriate page
       window.location.href = url;
