@@ -275,7 +275,7 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="progress-container">
-        <span class="progress-label">Progress: <span id="completed">0</span>/10 (<span id="percent">0%</span>)</span>
+        <span class="progress-label">Progress: <span id="completed">0</span>/300 (<span id="percent">0%</span>)</span>
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
         </div>
@@ -316,7 +316,7 @@
 
   <script>
     const progress = {
-      total: 10,
+      total: 300,
       completed: 0
     };
 
@@ -324,7 +324,7 @@
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
 
-      const percent = (progress.completed / progress.total) * 100;
+      const percent = (progress.completed / progress.total) * 33;
 
       document.getElementById('completed').textContent = progress.completed;
       document.getElementById('percent').textContent = `${percent.toFixed(1)}%`;
