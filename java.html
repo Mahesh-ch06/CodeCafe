@@ -500,7 +500,7 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
       progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
 
-      const percent = (progress.completed / progress.total) * 100;
+      const percent = (progress.completed / total) * 100;
 
       document.getElementById('completed').textContent = progress.completed;
       document.getElementById('percent').textContent = `${percent.toFixed(1)}%`;
