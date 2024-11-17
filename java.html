@@ -550,9 +550,11 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       window.location.href = urls[task];
     }
 
-    function updateProgress() {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
+  function updateProgress() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const completedTasks = Array.from(checkboxes).filter(cb => cb.checked).length;
+  const totalTasks = checkboxes.length;
+  progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
 
       const percent = (progress.completed / total) * 100;
 
