@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course Tracker with Notes</title>
+  <title>Code Cafe</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    /* Reset */
-    * {
+    /* Your CSS styles remain unchanged */
+        /* Reset */
+  * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -57,12 +58,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     header h1 {
       font-size: 20px;
       font-weight: 800;
       color: var(--primary-color);
+    }
+
+    header .header-actions {
+      display: flex;
+      gap: 16px;
     }
 
     header button {
@@ -224,7 +232,8 @@
     .notes-btn:hover {
       background-color: #059669;
     }
-        /* Floating Action Button */
+
+    /* Floating Action Button */
     .fab {
     position: fixed;
     bottom: 24px;
@@ -342,8 +351,7 @@ body.dark-mode .fab-menu .fab-nav-btn img {
     width: 16px;
     height: 16px;
   }
-    
-  /* Footer */
+
   footer {
     display: flex;
     justify-content: center;
@@ -373,11 +381,13 @@ body.dark-mode .fab-menu .fab-nav-btn img {
   }
 
   .version {
+    
     font-size: 14px;
     color: var(--subtext-color);
-    padding-left: 10px; /* Adds space to move the version text more to the left */
+    padding-left: 0px;
   }
 
+    
 
     /* Responsive Design */
     @media (max-width: 768px) {
@@ -403,6 +413,7 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       <button id="dark-mode-toggle">
         <img src="https://img.icons8.com/ios-filled/50/null/moon-symbol.png" alt="dark mode"> Dark Mode
       </button>
+    </div>
   </header>
 
   <div class="layout">
@@ -419,30 +430,23 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       <h2>Courses</h2>
       <div class="course-section">
         <div class="section-header" onclick="toggleSection(this)">
-          <span>Step 1: Java Basics and Syntax</span>
+          <span>Step 1: Basics</span>
           <span>+</span>
         </div>
         <div class="section-content">
           <div class="task">
             <label>
-              <input type="checkbox" onclick="updateProgress()"> Basic Structure of a Java Program
+              <input type="checkbox" onclick="updateProgress()"> Loops
               <span class="difficulty easy">Easy</span>
             </label>
             <button class="notes-btn" onclick="manageNotes('Loops')">Notes</button>
           </div>
           <div class="task">
             <label>
-              <input type="checkbox" onclick="updateProgress()"> Understanding 
-              <span class="difficulty easy">Easy</span>
+              <input type="checkbox" onclick="updateProgress()"> Conditional Statements
+              <span class="difficulty medium">Medium</span>
             </label>
             <button class="notes-btn" onclick="manageNotes('Conditional Statements')">Notes</button>
-          </div>
-          <div class="task">
-            <label>
-              <input type="checkbox" onclick="updateProgress()"> Declaring Variables 
-              <span class="difficulty easy">Easy</span>
-            </label>
-            <button class="notes-btn" onclick="manageNotes('Declaring Variables')">Notes</button>
           </div>
         </div>
         <!-- Step 2 -->
@@ -488,17 +492,36 @@ body.dark-mode .fab-menu .fab-nav-btn img {
             <button class="notes-btn" onclick="manageNotes('Searching Algorithms')">Notes</button>
           </div>
         </div>
-
-        <!-- Step 4 -->
-        
       </div>
       </div>
     </main>
   </div>
 
-<footer>
+  <div class="course-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <span>Step 1: Basics</span>
+      <span>+</span>
+    </div>
+    <div class="section-content">
+      <div class="task">
+        <label>
+          <input type="checkbox" onclick="updateProgress()"> Loops
+          <span class="difficulty easy">Easy</span>
+        </label>
+        <button class="notes-btn" onclick="manageNotes('Loops')">Notes</button>
+      </div>
+      <div class="task">
+        <label>
+          <input type="checkbox" onclick="updateProgress()"> Conditional Statements
+          <span class="difficulty medium">Medium</span>
+        </label>
+        <button class="notes-btn" onclick="manageNotes('Conditional Statements')">Notes</button>
+      </div>
+    </div>
+
+  <footer>
     <div class="footer-content">
-      <div class="version">Version 2.1.3</div>
+      <div class="version">Version 1.0.0</div>
       <div class="copyright">&copy; 2024 Code Café. All Rights Reserved.</div>
     </div>
   </footer>
@@ -522,13 +545,10 @@ body.dark-mode .fab-menu .fab-nav-btn img {
 </div>
 
   <script>
-    const progress = {
-      total: 300,
-      completed: 0
-    };
-    total=300;
+    const progress = { total: 300, completed: 0 };
+    total = 300;
 
-    function toggleFabMenu() {
+  function toggleFabMenu() {
     const fabMenu = document.getElementById('fab-menu');
     const isVisible = fabMenu.classList.toggle('visible');
 
@@ -550,37 +570,28 @@ body.dark-mode .fab-menu .fab-nav-btn img {
       window.location.href = urls[task];
     }
 
-  function updateProgress() {
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  const completedTasks = Array.from(checkboxes).filter(cb => cb.checked).length;
-  const totalTasks = checkboxes.length;
-  progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
-
-      const percent = (progress.completed / total) * 100;
-
-      document.getElementById('completed').textContent = progress.completed;
-      document.getElementById('percent').textContent = `${percent.toFixed(1)}%`;
-      document.getElementById('progress-fill').style.width = `${percent}%`;
-
-      localStorage.setItem('progress', JSON.stringify(progress));
-    }
-
     function toggleSection(header) {
       const content = header.nextElementSibling;
       content.style.display = content.style.display === 'block' ? 'none' : 'block';
     }
 
-    function manageNotes(task) {
-      let url;
-      if (task === 'Loops') {
-        url = "https://mahesh06.me/CodeCafe/step1";
-      } else if (task === 'Conditional Statements') {
-        url = "http://mahesh06.me/CodeCafe/step1";
-      } else if(task === 'Declaring Variables') {
-        url = "http://mahesh06.me/CodeCafe/step1";
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      progress.completed = [...checkboxes].filter(checkbox => checkbox.checked).length;
+      const percent = (progress.completed / total) * 100;
 
-      // Navigate to the appropriate page
-      window.location.href = url;
+      document.getElementById('completed').textContent = progress.completed;
+      document.getElementById('percent').textContent = `${percent.toFixed(2)}%`;
+      document.getElementById('progress-fill').style.width = `${percent}%`;
+      localStorage.setItem('progress', JSON.stringify(progress));
+    }
+
+    function manageNotes(task) {
+      const urls = {
+        Loops: "https://mahesh06.me/CodeCafe/step1",
+        "Conditional Statements": "https://mahesh06.me/CodeCafe/step2",
+      };
+      window.location.href = urls[task];
     }
 
     function loadProgress() {
@@ -596,7 +607,7 @@ body.dark-mode .fab-menu .fab-nav-btn img {
 
     function toggleDarkMode() {
       const isDark = document.body.classList.toggle('dark-mode');
-      localStorage.setItem('dark-mode', isDark);
+      localStorage.setItem('dark-mode', JSON.stringify(isDark));
     }
 
     function loadDarkMode() {
