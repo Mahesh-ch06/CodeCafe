@@ -689,107 +689,46 @@
 <div class="navigation">
     <a href="step1.html" class="nav-button previous">Back</a>
     <a href="https://silly-log-dba.notion.site/13c12ec9fb8380eeb50cd5f4e3a6f66d?pvs=105" class="nav-button coding-button">
-        Start Coding
-    </a>
-    <a href="Leading.html" class="nav-button submit">Leading board</a>
+        Start Coding</a>
+    <a href="Leading.html" class="nav-button submit">Leading Board</a>
 </div>
 
 <style>
-/* Navigation Layout */
-.navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 2em;
-    padding: 1em;
-    border-top: 1px solid #e0e0e0; /* Lighter separator line */
-}
+    /* Layout Styling for Navigation */
+    .navigation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 2em;
+        padding: 1em;
+        border-top: 1px solid #e0e0e0; /* Light gray border */
+    }
 
-/* Default Navigation Buttons */
-.nav-button {
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    text-decoration: none;
-    border-radius: 20px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-    display: inline-block;
-    text-align: center;
-    background-color: #f7f7f7;
-}
+    /* Notion-like Button Styling */
+    .nav-button {
+        padding: 10px 16px;
+        font-size: 14px;
+        color: #444; /* Darker gray text color */
+        text-decoration: none;
+        background-color: #f5f5f5; /* Light gray background */
+        border: 1px solid #e0e0e0; /* Subtle border */
+        border-radius: 6px; /* Rounded corners */
+        font-weight: 500;
+        transition: background-color 0.2s, transform 0.1s ease, box-shadow 0.1s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    }
 
-.nav-button.previous {
-    background-color: #f2f2f2;
-    border: 1px solid #e0e0e0;
-    color: #9e9e9e;
-}
+    /* Hover Effect */
+    .nav-button:hover {
+        background-color: #f0f0f0; /* Slightly darker gray on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Slightly larger shadow */
+    }
 
-.nav-button.submit {
-    background-color: #e8f5e9;
-    border: 1px solid #a5d6a7;
-    color: #388e3c;
-}
-
-.nav-button:hover {
-    background-color: #e0e0e0;
-    color: #000;
-    border-color: #bdbdbd;
-    transform: translateY(-2px);
-}
-
-.nav-button:active {
-    background-color: #c0c0c0;
-    transform: translateY(1px);
-}
-
-.nav-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.5);
-}
-
-/* Start Coding Button */
-.nav-button.coding-button {
-    background: linear-gradient(135deg, #7a5af8, #d371ff);
-    color: white;
-    position: relative;
-    overflow: hidden;
-    padding: 10px 22px; /* Matches size of other buttons */
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    border: 1px solid #7a5af8;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-.nav-button.coding-button:hover {
-    background: linear-gradient(135deg, #a66df8, #df85ff);
-    box-shadow: 0 4px 8px rgba(122, 90, 248, 0.3);
-    transform: translateY(-2px);
-}
-
-.nav-button.coding-button:active {
-    background: linear-gradient(135deg, #6841d9, #b956d9);
-    transform: translateY(1px);
-}
-
-.nav-button.coding-button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.nav-button.coding-button:hover::after {
-    opacity: 1;
-}
+    /* Click/Active Effect */
+    .nav-button:active {
+        transform: scale(0.98); /* Slight shrink effect */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Smaller shadow */
+        background-color: #e8e8e8; /* Darken background on click */
+    }
 </style>
-
